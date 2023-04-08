@@ -71,8 +71,23 @@ class Player(BasePlayer):
         ans6 = models.LongStringField()
 
 
-
 # PAGES
+class Game1Introduction(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 1
+
+class Game2Introduction(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 2
+
+class Game3Introduction(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 3
+
+
 class CentipedeGame(Page):
     form_model = 'group'
     form_fields = ['end_turn']
@@ -121,4 +136,4 @@ class Results(Page):
 
 
 
-page_sequence = [CentipedeGame, Questionnaire, ResultsWaitPage, Results]
+page_sequence = [Game1Introduction, Game2Introduction, Game3Introduction, CentipedeGame, Questionnaire, ResultsWaitPage, Results]

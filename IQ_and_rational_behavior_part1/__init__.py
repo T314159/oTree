@@ -23,26 +23,45 @@ class Player(BasePlayer):
 
 # PAGES
 class Introduction(Page):
+    pass
+
+class SetGroups(WaitPage):
     @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        player.participant.unique_id = player.id_in_group
-        if player.id_in_group <= 4:
-            player.participant.control = True
-        elif player.id_in_group <= 8:
-            player.participant.control = False
-        elif player.id_in_group <= 12:
-            player.participant.control = True
-        elif player.id_in_group <= 16:
-            player.participant.control = False
-        elif player.id_in_group <= 20:
-            player.participant.control = True
-        else:
-            player.participant.control = False
+    def after_all_players_arrive(group: Group):
+        import random
+        permutation = random.shuffle([['standard', 'constant', 'linear'],
+                                      ['standard', 'linear', 'constant'],
+                                      ['constant', 'standard', 'linear'],
+                                      ['constant', 'linear', 'standard'],
+                                      ['linear', 'standard', 'constant'],
+                                      ['linear', 'constant', 'standard']])
+
+        for player in group.get_players():
+            player.participant.unique_id = player.id_in_group
+            if player.id_in_group <= 4:
+                player.participant.control = True
+                player.participant.variant_order = permutation[0]
+            elif player.id_in_group <= 8:
+                player.participant.control = False
+                player.participant.variant_order = permutation[1]
+            elif player.id_in_group <= 12:
+                player.participant.control = True
+                player.participant.variant_order = permutation[2]
+            elif player.id_in_group <= 16:
+                player.participant.control = False
+                player.participant.variant_order = permutation[3]
+            elif player.id_in_group <= 20:
+                player.participant.control = True
+                player.participant.variant_order = permutation[4]
+            else:
+                player.participant.control = False
+                player.participant.variant_order = permutation[5]
 
 class Overview(Page):
     pass
 
 
-page_sequence = [Introduction, Overview]
+
+page_sequence = [Introduction, SetGroups, Overview]
 
 
