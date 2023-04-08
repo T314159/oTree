@@ -19,23 +19,12 @@ class Group(BaseGroup):
     pass
 
 class Player(BasePlayer):
-    raven_score = models.IntegerField()
+    pass
 
 # PAGES
 class Introduction(Page):
-    pass
-
-class Overview(Page):
-    pass
-
-class PatternExplanation(Page):
-    pass
-
-class RavenTest(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        player.raven_score = 9
-        player.participant.raven_score = player.raven_score
         player.participant.unique_id = player.id_in_group
         if player.id_in_group <= 4:
             player.participant.control = True
@@ -50,16 +39,10 @@ class RavenTest(Page):
         else:
             player.participant.control = False
 
-class Part1End(Page):
+class Overview(Page):
     pass
 
-class ResultsWaitPage(WaitPage):
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        player.participant.raven_score = player.raven_score
 
-
-
-page_sequence = [Introduction, Overview, PatternExplanation, RavenTest, Part1End, ResultsWaitPage]
+page_sequence = [Introduction, Overview]
 
 

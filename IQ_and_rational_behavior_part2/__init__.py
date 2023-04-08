@@ -40,7 +40,7 @@ class IntroAndPayment(Page):
         return dict(
             raven_score=player.participant.raven_score,
             unique_id=player.participant.unique_id,
-            participant=player.participant,
+            raven_percentile=player.participant.raven_percentile,
             control=player.participant.control,
         )
 

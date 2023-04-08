@@ -15,7 +15,7 @@ SESSION_CONFIGS = [
         name='ravens_test',
         display_name="Raven's Test",
         app_sequence=['ravens_test', 'payment_info'],
-        num_demo_participants=3
+        num_demo_participants=2
     ),
     dict(
         name='trust_tutorial',
@@ -26,7 +26,7 @@ SESSION_CONFIGS = [
     dict(
         name='IQ_and_rational_behavior',
         display_name="IQ and Rational Behavior",
-        app_sequence=['IQ_and_rational_behavior_part1', 'IQ_and_rational_behavior_part2', 'centipede_game', 'payment_info'],
+        app_sequence=['IQ_and_rational_behavior_part1', 'ravens_test', 'IQ_and_rational_behavior_part2', 'centipede_game', 'payment_info'],
         num_demo_participants=2
     ),
     dict(
@@ -46,7 +46,7 @@ SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=0.01, participation_fee=5.00, doc=""
 )
 
-PARTICIPANT_FIELDS = ['control', 'unique_id', 'raven_score']
+PARTICIPANT_FIELDS = ['control', 'unique_id', 'raven_results', 'raven_score', 'raven_percentile']
 SESSION_FIELDS = []
 
 # ISO-639 code
