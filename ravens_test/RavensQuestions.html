@@ -1,0 +1,24 @@
+{{ block content }}
+
+    <div style="float:left; width:50%;">
+    <img class="image" src="{{ static question_data.path }}" alt="test_image alt" style="width:100%;"/>
+    </div>
+
+    <div style="float:left; width:50%;">
+    {{ for image in image_data }}
+        <label style="text-align: left; width:24%">
+            <img src="{{ static image.path }}" width="100%">
+<!--            <br>-->
+            <input type="radio" name="img_choice" value="{{ image.name }}" class="persist">
+        </label>
+    {{ endfor }}
+
+    </div>
+
+
+    {{ formfield_errors 'img_choice' }}
+
+    <br>
+    {{ next_button }}
+
+{{ endblock }}

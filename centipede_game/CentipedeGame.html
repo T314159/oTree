@@ -1,0 +1,136 @@
+{{ block title }}
+    Game {{ player.round_number }}
+{{ endblock }}
+
+{{ block content }}
+
+    <style>
+    .turn_1 {
+        display: none;
+    }
+
+    .otree-body{
+        width: 70%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .bottom-left {
+      position: absolute;
+      bottom: 8px;
+      left: 16px;
+    }
+    </style>
+
+<main id='main' style="margin: 0px">
+    <p id="timer"></p>
+
+    <div class="container">
+      <img class="image" src="{{ static 'centipede_game/image.png' }}" alt="test_image alt" style="width:100%;"/>
+      <div class="bottom-left">Bottom Left</div>
+    </div>
+
+    <p class="turn_1"> Turn 1</p>
+
+    <div id="turn_2" style="display: none">
+        <p> Turn 2</p>
+    </div>
+
+    <div id="turn_3" style="display: none">
+        <p> Turn 3</p>
+    </div>
+
+    <div id="turn_4" style="display: none">
+        <p> Turn 4</p>
+    </div>
+
+    <div id="turn_5" style="display: none">
+        <p> Turn 5</p>
+    </div>
+
+    <div id="turn_6" style="display: none">
+        <p> Turn 6</p>
+    </div>
+
+    <button class = 'otree-btn-next btn btn-primary' id='continue' type='button' onclick='func_continue()' style="display: none">
+        Continue
+    </button>
+
+    <button class = 'otree-btn-next btn btn-primary' id='stop' type='button' onclick='func_stop()' style="display: none">
+        Stop
+    </button>
+</main>
+
+<input type='hidden' name='end_turn' id='end_turn' />
+{{ formfield_errors 'end_turn' }}
+
+{{ endblock }}
+
+{{ block script }}
+    <script>
+<!--    var now = new Date().getTime();-->
+<!--    document.getElementById("timer").innerHTML = (now-original_time);-->
+    setTimeout(
+        function () {
+            alert("Time has run out. Please make your decision.");
+            //Put what I want
+        },
+        30*1000 // 30 seconds
+    );
+
+    var turn = 1;
+    function func_continue(){
+        turn += 1;
+        liveSend({'choice': 'Continue'});
+        update();
+    }
+
+    function func_stop(){
+        liveSend({'choice': 'Stop'});
+        document.getElementById('end_turn').value = turn;
+        form = document.getElementById('form');
+        form.submit();
+    }
+
+    function liveRecv(data){
+        if (data['choice'] == 'Continue'){
+            turn += 1;
+            update();
+        }
+        else if (data['choice'] == 'Stop'){
+            document.getElementById('end_turn').value = turn;
+            form = document.getElementById("form");
+            form.submit();
+        }
+    }
+
+    function update(){
+        switch(turn) {
+          case 6:
+            document.getElementById('turn_6').style.display = 'block';
+          case 5:
+            document.getElementById('turn_5').style.display = 'block';
+          case 4:
+            document.getElementById('turn_4').style.display = 'block';
+          case 3:
+            document.getElementById('turn_3').style.display = 'block';
+          case 2:
+            document.getElementById('turn_2').style.display = 'block';
+          case 1:
+            $(".turn_1").css("display", "block");
+          default:
+            break;
+        }
+        if( (turn%2) == (js_vars.my_id%2) ){
+            document.getElementById('continue').style.display = 'block';
+            document.getElementById('stop').style.display = 'block';
+        }
+        else{
+            document.getElementById('continue').style.display = 'none';
+            document.getElementById('stop').style.display = 'none';
+        }
+    }
+
+    update();
+    </script>
+{{ endblock }}

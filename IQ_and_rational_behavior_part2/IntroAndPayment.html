@@ -1,0 +1,165 @@
+{{ block title }}
+    Part 2: Games 1, 2, and 3
+{{ endblock }}
+{{ block content }}
+
+    <head>
+    <style>
+    h2 {text-align: center;}
+    </style>
+    </head>
+
+    <p>Here is the Raven score from the last app: {{ raven_score }}</p>
+
+    <p>Your id is : {{ unique_id }}</p>
+    <p>Your participant is : {{ participant }}</p>
+    <p>Your participant is : {{ control }}</p>
+
+    <p>For Part 2, you will participate in 3 short games. For each game, the computer will randomly pair
+    you with another person in the lab. You will be paired with someone you haven’t been paired
+    with before.
+    </p>
+
+    <h2>Payment</h2>
+
+    <p> You will have the opportunity to earn Lab Dollars during each game. At the end of the
+experiment, one of the 3 games will be randomly chosen. Each has an equal chance of being
+selected. You will receive the Lab Dollars payment for the selected game and the selected game
+only. </p>
+    <p>For example, if you earned 1500 Lab Dollars (LD) in Game 1, 600LD in Game 2, and 700LD in
+Game 3, and Game 2 was randomly chosen, you would receive 600LD. </p>
+
+    <p> Please answer the follow questions about how the games and payment works: </p>
+
+    <p> The experiment will proceed once everyone has completed the quiz questions. </p>
+
+    <div id='questions'> </div>
+
+    <div id='q1'>
+        <p> 1. I will be paired with the same person for all of the games </p>
+        <input type="radio" id="q1_true" name="q1" value="True">
+        <label for="q1_true">True</label><br>
+        <input type="radio" id="q1_false" name="q1" value="False">
+        <label for="q1_false">False</label><br><br>
+    </div>
+
+    <div id='q1_error' style='display: none'>
+        <p style='color: red;'>Incorrect, you will be paired with a different person for each of the 3 rounds of this game. Try again.</p>
+    </div>
+
+    <div id='q2' style='display: none'>
+        <p> 2. I will be randomly assigned to a new person for each game</p>
+        <input type="radio" id="q2_true" name="q2" value="True">
+        <label for="q2_true">True</label><br>
+        <input type="radio" id="q2_false" name="q2" value="False">
+        <label for="q2_false">False</label><br><br>
+    </div>
+
+    <div id='q2_error' style='display: none'>
+        <p style='color: red;'>Incorrect, you will indeed be randomly assigned to a new person each of the 3 rounds. Try again. </p>
+    </div>
+
+    <div id='q3' style='display: none'>
+        <p> 3. I will receive payment for every game I complete</p>
+        <input type="radio" id="q3_true" name="q3" value="True">
+        <label for="q2_true">True</label><br>
+        <input type="radio" id="q3_false" name="q3" value="False">
+        <label for="q2_false">False</label><br><br>
+    </div>
+
+    <div id='q3_error' style='display: none'>
+        <p style='color: red;'>Incorrect, you will only receive payment for 1 of the 3 games, randomly chosen at the end of the experiment. Try again. </p>
+    </div>
+
+    <div id='q4' style='display: none'>
+        <p> 4. One of the 3 games will be chosen at random for my payment</p>
+        <input type="radio" id="q4_true" name="q4" value="True">
+        <label for="q2_true">True</label><br>
+        <input type="radio" id="q4_false" name="q4" value="False">
+        <label for="q2_false">False</label><br><br>
+    </div>
+
+    <div id='q4_error' style='display: none'>
+        <p style='color: red;'>Incorrect, one of the 3 games will indeed be chosen at random for your payment. Try again. </p>
+    </div>
+
+    <button class = 'otree-btn-next btn btn-primary' id='check' type='button' onclick='update()'>
+        Check
+    </button>
+
+
+    <input type='hidden' name='part1_intro_q1' id='part1_intro_q1' />
+    <input type='hidden' name='part1_intro_q2' id='part1_intro_q2' />
+    <input type='hidden' name='part1_intro_q3' id='part1_intro_q3' />
+    <input type='hidden' name='part1_intro_q4' id='part1_intro_q4' />
+
+    <button class = 'otree-btn-next btn btn-primary' id='next' style='visibility: hidden'>
+        Next
+    </button>
+
+    <script>
+        let state = 1;
+        document.getElementById('part1_intro_q1').value = 'False';
+        document.getElementById('part1_intro_q2').value = 'False';
+        document.getElementById('part1_intro_q3').value = 'False';
+        document.getElementById('part1_intro_q4').value = 'False';
+        function update() {
+            switch(state) {
+              case 1:
+                if (document.getElementById('q1_false').checked) {
+                    state = 2;
+                    document.getElementById('q2').style.display = 'block'
+                    document.getElementById('q1_error').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q1_error').style.display = 'block'
+                    document.getElementById('part1_intro_q1').value = 'True';
+                }
+                break;
+
+              case 2:
+                if (document.getElementById('q2_true').checked) {
+                    state = 3;
+                    document.getElementById('q3').style.display = 'block'
+                    document.getElementById('q2_error').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q2_error').style.display = 'block'
+                    document.getElementById('part1_intro_q2').value = 'True';
+                }
+                break;
+
+              case 3:
+                if (document.getElementById('q3_false').checked) {
+                    state = 4;
+                    document.getElementById('q4').style.display = 'block'
+                    document.getElementById('q3_error').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q3_error').style.display = 'block'
+                    document.getElementById('part1_intro_q3').value = 'True';
+                }
+                break;
+
+              case 4:
+                if (document.getElementById('q4_true').checked) {
+                    state = 5;
+                    document.getElementById('next').style.visibility = 'visible'
+                    document.getElementById('q4_error').style.display = 'none'
+                    document.getElementById('check').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q4_error').style.display = 'block'
+                    document.getElementById('part1_intro_q4').value = 'True';
+                }
+                break;
+
+              default:
+                break;
+            }
+        }
+    </script>
+
+
+{{ endblock }}
+
