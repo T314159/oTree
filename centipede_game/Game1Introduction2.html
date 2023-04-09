@@ -1,0 +1,34 @@
+{{ block title }}
+    Game 1
+{{ endblock }}
+{{ block content }}
+
+    <head>
+    <style>
+    h2 {text-align: center;}
+    </style>
+    </head>
+
+    <table style="margin-top: 4%">
+        <tr>
+            <td style="width: 45%">
+                {{ if player.participant.game1 == 'standard' }}
+                <p>BLUE faces similar choices, represented by the blue lines. BLUE can STOP or CONTINUE. If
+                BLUE chooses STOP, the payments have now changed. Each turn, the piles are doubled and
+                swapped with each other. So now RED would be receiving 20LD while BLUE would be
+                receiving 80LD.
+                </p>
+                {{ endif }}
+                <p>If BLUE instead chooses to CONTINUE, the turn passes back to RED. (click 'Next' to advance to it) </p>
+            </td>
+            <td style="padding-left: 2%">
+                <img class="image" src="{{ static 'centipede_game/tutorial_standard1.png' }}" style="width:100%;"/>
+            </td>
+        </tr>
+    </table>
+
+    {{ next_button }}
+
+
+{{ endblock }}
+

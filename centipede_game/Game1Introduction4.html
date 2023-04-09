@@ -1,0 +1,31 @@
+{{ block title }}
+    Game 1
+{{ endblock }}
+{{ block content }}
+
+    <head>
+    <style>
+    h2 {text-align: center;}
+    </style>
+    </head>
+
+    <table style="margin-top: 4%">
+        <tr>
+            <td style="width: 25%">
+                <p>This alternation can happen up to a maximum of 6 turns, after which, the game is forced to end.
+                The full tree of choices and end payments are shown in the figure below. Please note that both
+                participants see and interact with this full tree of choices. Understanding how the game works is
+                crucial, so please take a few minutes to look over the following figure now although it will also
+                be shown to you during the game.</p>
+            </td>
+            <td style="padding-left: 2%">
+                <img class="image" src="{{ static 'centipede_game/tutorial_standard1.png' }}" style="width:100%;"/>
+            </td>
+        </tr>
+    </table>
+
+    {{ next_button }}
+
+
+{{ endblock }}
+

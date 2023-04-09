@@ -14,8 +14,6 @@ class C(BaseConstants):
     import random
     matrix = [i for i in range(1, 12)]
     random.shuffle(matrix)
-    variant_order = ['standard', 'constant', 'linear']
-    random.shuffle(variant_order)
 
     payoffs = {
         'standard': [[40, 10], [20, 80], [160, 40], [80, 320], [640, 160], [320, 1280], [2560, 640]],
@@ -28,7 +26,6 @@ class Subsession(BaseSubsession):
     variant = models.StringField()
 
 def creating_session(subsession: Subsession):
-      subsession.variant = C.variant_order[subsession.round_number-1]
       matrix = subsession.get_group_matrix()
 
       if subsession.round_number == 1:
@@ -72,21 +69,39 @@ class Player(BasePlayer):
 
 
 # PAGES
-class Game1Introduction(Page):
+class Game1Introduction1(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 1
+class Game1Introduction2(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 1
+class Game1Introduction3(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 1
+class Game1Introduction4(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 1
 
-class Game2Introduction(Page):
+class Game2Introduction1(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 2
 
-class Game3Introduction(Page):
+class Game3Introduction1(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 3
 
+
+class Assignment(Page):
+    pass
+
+class WaitForBoth(WaitPage):
+    pass
 
 class CentipedeGame(Page):
     form_model = 'group'
@@ -103,7 +118,10 @@ class CentipedeGame(Page):
             return {1: {'choice' : data['choice']}}
 
     def before_next_page(player: Player, timeout_happened):
-        payoff = C.payoffs[C.variant_order[player.round_number-1]]
+        if player.round_number == 1: payoff = C.payoffs[player.participant.game1]
+        elif player.round_number == 2: payoff = C.payoffs[player.participant.game2]
+        elif player.round_number == 3: payoff = C.payoffs[player.participant.game3]
+
         player.payoff = payoff[player.group.end_turn-1][player.id_in_group-1]
         player.participant.control = False
 
@@ -136,4 +154,6 @@ class Results(Page):
 
 
 
-page_sequence = [Game1Introduction, Game2Introduction, Game3Introduction, CentipedeGame, Questionnaire, ResultsWaitPage, Results]
+page_sequence = [Game1Introduction1, Game1Introduction2, Game1Introduction3, Game1Introduction4,
+                 Game2Introduction1, Game3Introduction1, Assignment, WaitForBoth, CentipedeGame,
+                 Questionnaire, ResultsWaitPage, Results]

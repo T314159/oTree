@@ -8,7 +8,7 @@ Your app description
 class C(BaseConstants):
     NAME_IN_URL = 'ravens_test'
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 12
+    NUM_ROUNDS = 2
     QUESTION_ORDER = ["03", "10", "12", "15", "16", "18", "21", "22", "28", "30", "31", "34"]
     CORRECT_ANSWERS = [7, 4, 6, 2, 4, 7, 8, 7, 5, 5, 4, 1]
     IMAGE_NAMES = [

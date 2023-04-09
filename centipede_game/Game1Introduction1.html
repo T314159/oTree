@@ -9,28 +9,28 @@
     </style>
     </head>
 
-    {{ if player.round_number == 1 }}
-    <div style="width: 100%;">
-        <div style="width: 50%; height: 100px; float: left">
+    <table style="margin-top: 4%">
+        <tr>
+            <td style="width: 45%">
                 <p>You will now participate in Game 1. Game 1 involves 2 participants who we will call the RED
                 participant and the BLUE participant. It will be conducted once and only once.
                 </p>
+                {{ if player.participant.game1 == 'standard' }}
                 <p> The game begins with RED’s turn. RED has two choices shown by the red lines: STOP or
                 CONTINUE. If RED chooses STOP, the game ends and the participants receive the payments
                 shown on the screen: 40LD for RED and 10LD for BLUE. </p>
-        </div>
-        <div style="margin-left: 50%; height: 100px; background: blue;">
-            Right Div
-        </div>
-    </div>
-    {{ endif }}
+                {{ endif }}
+                <p>If RED chooses instead to CONTINUE, then the turn passes to BLUE whose choices will be
+                shown on the next screen. (click 'Next' to advance to it) </p>
+            </td>
+            <td style="padding-left: 2%">
+                <img class="image" src="{{ static 'centipede_game/tutorial_standard1.png' }}" style="width:100%;"/>
+            </td>
+        </tr>
+    </table>
 
+    {{ next_button }}
 
-    <input type='hidden' name='part1_intro_q1' id='part1_intro_q1' />
-
-    <button class = 'otree-btn-next btn btn-primary' id='next' style='visibility: hidden'>
-        Next
-    </button>
 
 {{ endblock }}
 

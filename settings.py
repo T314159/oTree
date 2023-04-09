@@ -46,7 +46,7 @@ SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=0.01, participation_fee=5.00, doc=""
 )
 
-PARTICIPANT_FIELDS = ['unique_id', 'control', 'variant_order', 'raven_results', 'raven_score', 'raven_percentile']
+PARTICIPANT_FIELDS = ['unique_id', 'control', 'game1', 'game2', 'game3', 'raven_results', 'raven_score', 'raven_percentile']
 SESSION_FIELDS = []
 
 # ISO-639 code
