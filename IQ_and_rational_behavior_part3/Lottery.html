@@ -1,0 +1,32 @@
+{{ block title }}
+Lottery Choice
+{{ endblock }}
+{{ block content }}
+    <p>
+    For this question, you are given a list of 6 lotteries with the prizes in Lab Dollars shown in the
+    Table below. You will make a choice of which lottery to enter: 1-6. For each of the listed
+    lotteries, the chance of winning the two payoffs is equal. That is, for lottery 2 for example, you
+    can win 120LD with 50% chance and 180LD with 50% chance. At the end of the experiment, if
+    the Lottery Choice is selected for payment, then the lottery # you selected will be run, and the
+    randomly selected payoff given to you.
+    </p>
+
+    <table>
+      <tr>
+      <th> Lottery # </th>
+      <th> Choice A (Lab Dollars) </th>
+      <th> Choice B (Lab Dollars) </th>
+      </tr>
+      <tr>  <td> 1 </td> <td> 140 </td> <td> 140 </td>  </tr>
+      <tr>  <td> 2 </td> <td> 120 </td> <td> 180 </td>  </tr>
+      <tr>  <td> 3 </td> <td> 100 </td> <td> 220 </td>  </tr>
+      <tr>  <td> 4 </td> <td> 80 </td> <td> 260 </td>  </tr>
+      <tr>  <td> 5 </td> <td> 60 </td> <td> 300 </td>  </tr>
+      <tr>  <td> 6 </td> <td> 10 </td> <td> 350 </td>  </tr>
+    </table>
+
+    {{ formfield 'lottery_choice' label="Which lottery would you like to enter?" }}
+
+    {{ next_button }}
+
+{{ endblock }}

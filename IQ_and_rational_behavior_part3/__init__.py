@@ -21,11 +21,24 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
-
+    lottery_choice = models.IntegerField(widget=widgets.RadioSelect, choices=[1, 2, 3, 4, 5, 6])
+    dictator_choice = models.IntegerField()
 
 # PAGES
-class MyPage(Page):
+class Introduction(Page):
+    pass
+
+# PAGES
+class Lottery(Page):
+    form_model = 'player'
+    form_fields = ['lottery_choice']
+
+# PAGES
+class Dictator(Page):
+    pass
+
+# PAGES
+class BackwardsInduction(Page):
     pass
 
 
@@ -37,4 +50,4 @@ class Results(Page):
     pass
 
 
-page_sequence = [MyPage, ResultsWaitPage, Results]
+page_sequence = [Introduction, Lottery, Dictator, BackwardsInduction, ResultsWaitPage, Results]

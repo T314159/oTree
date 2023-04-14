@@ -30,6 +30,12 @@ SESSION_CONFIGS = [
         num_demo_participants=2
     ),
     dict(
+        name='IQ_and_rational_behavior_3',
+        display_name="IQ and Rational Behavior (just part 3)",
+        app_sequence=['IQ_and_rational_behavior_part3'],
+        num_demo_participants=1
+    ),
+    dict(
         name='centipede_game',
         display_name="Centipede Game",
         app_sequence=['centipede_game'],
