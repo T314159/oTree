@@ -44,8 +44,8 @@ class Dictator(Page):
 
     def before_next_page(player: Player, timeout_happened):
         player.participant.dictator_choice=player.dictator_choice
-
-        #TODO: make 2 player
+        for opponent in player.get_others_in_group():
+            opponent.participant.dictator_from_others = 100-player.dictator_choice
 
 # PAGES
 class BackwardsInduction(Page):
