@@ -2,6 +2,30 @@
 Lottery Choice
 {{ endblock }}
 {{ block content }}
+    <style>
+    td, th {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align:center;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2;}
+
+    tr:hover {background-color: #ddd;}
+
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+      text-align:center;
+    }
+    .center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    </style>
     <p>
     For this question, you are given a list of 6 lotteries with the prizes in Lab Dollars shown in the
     Table below. You will make a choice of which lottery to enter: 1-6. For each of the listed
@@ -11,22 +35,30 @@ Lottery Choice
     randomly selected payoff given to you.
     </p>
 
-    <table>
-      <tr>
-      <th> Lottery # </th>
-      <th> Choice A (Lab Dollars) </th>
-      <th> Choice B (Lab Dollars) </th>
-      </tr>
-      <tr>  <td> 1 </td> <td> 140 </td> <td> 140 </td>  </tr>
-      <tr>  <td> 2 </td> <td> 120 </td> <td> 180 </td>  </tr>
-      <tr>  <td> 3 </td> <td> 100 </td> <td> 220 </td>  </tr>
-      <tr>  <td> 4 </td> <td> 80 </td> <td> 260 </td>  </tr>
-      <tr>  <td> 5 </td> <td> 60 </td> <td> 300 </td>  </tr>
-      <tr>  <td> 6 </td> <td> 10 </td> <td> 350 </td>  </tr>
-    </table>
+    <div style="float:left; width:60%; margin-top:2%;">
+        <table class='center'>
+          <tr>
+          <th> Lottery # </th>
+          <th> Choice A (Lab Dollars) </th>
+          <th> Choice B (Lab Dollars) </th>
+          </tr>
+          <tr>  <td> 1 </td> <td> 140 </td> <td> 140 </td>  </tr>
+          <tr>  <td> 2 </td> <td> 120 </td> <td> 180 </td>  </tr>
+          <tr>  <td> 3 </td> <td> 100 </td> <td> 220 </td>  </tr>
+          <tr>  <td> 4 </td> <td> 80 </td> <td> 260 </td>  </tr>
+          <tr>  <td> 5 </td> <td> 60 </td> <td> 300 </td>  </tr>
+          <tr>  <td> 6 </td> <td> 10 </td> <td> 350 </td>  </tr>
+        </table>
+    </div>
 
-    {{ formfield 'lottery_choice' label="Which lottery would you like to enter?" }}
+    <div style="float:left; width:35%; margin-left:5%; margin-top:2%;">
 
-    {{ next_button }}
+        {{ formfield 'lottery_choice' label="Which lottery would you like to enter?" }}
+        <br>
+        {{ next_button }}
+
+    </div>
+
+
 
 {{ endblock }}
