@@ -3,31 +3,194 @@
 {{ endblock }}
 {{ block content }}
 
-    <head>
-    <style>
-    h2 {text-align: center;}
-    </style>
-    </head>
 
-    <table style="margin-top: 4%">
-        <tr>
-            <td style="width: 45%">
-                <p>You will now participate in Game 1. Game 1 involves 2 participants who we will call the RED
-                participant and the BLUE participant. It will be conducted once and only once.
-                </p>
-                {{ if player.participant.game1 == 'standard' }}
-                <p> The game begins with RED’s turn. RED has two choices shown by the red lines: STOP or
-                CONTINUE. If RED chooses STOP, the game ends and the participants receive the payments
-                shown on the screen: 40LD for RED and 10LD for BLUE. </p>
-                {{ endif }}
-                <p>If RED chooses instead to CONTINUE, then the turn passes to BLUE whose choices will be
-                shown on the next screen. (click 'Next' to advance to it) </p>
-            </td>
-            <td style="padding-left: 2%">
-                <img class="image" src="{{ static 'centipede_game/tutorial_standard1.png' }}" style="width:100%;"/>
-            </td>
-        </tr>
-    </table>
+<p> You will have 30 seconds to make a decision on your turn, with a timer appearing in the upper
+right corner of the display. You must select an option in this time frame. The other participant
+will also have 30 seconds to make their decision. Regardless of how long they take to select their
+choice, the computer will wait the full 30 seconds before either continuing to your turn or ending
+the game.</p>
+
+<p>
+    Please answer some quiz questions about Game 1:
+1. There are 2 choices on each turn: True or False
+2. Participants are randomly paired to each other: True or False
+3. BLUE goes first: True or False
+4. If RED selects CONTINUE and then BLUE selects END, BLUE will receive __LD
+5. If both players select CONTINUE until turn 3, when RED selects STOP, RED will
+receive __LD and BLUE will receive __LD
+6. The game will end after the 6th round regardless of what BLUE chooses: True or False
+7. If both players select CONTINUE until turn 6, BLUE is faced with a choice of receiving
+__ for selecting STOP and __ for selecting CONTINUE
+
+
+    <p> The experiment will proceed once everyone has completed the quiz questions. </p>
+
+    <div id='questions'> </div>
+
+    <div id='q1'>
+        <p> 1. There are 2 choices on each turn </p>
+        <input type="radio" id="q1_true" name="q1" value="True">
+        <label for="q1_true">True</label><br>
+        <input type="radio" id="q1_false" name="q1" value="False">
+        <label for="q1_false">False</label><br><br>
+    </div>
+
+    <div id='q1_error' style='display: none'>
+        <p style='color: red;'>Incorrect, you will be paired with a different person for each of the 3 rounds of this game. Try again.</p>
+    </div>
+
+    <div id='q2' style='display: none'>
+        <p> 2. Participants are randomly paired to each other</p>
+        <input type="radio" id="q2_true" name="q2" value="True">
+        <label for="q2_true">True</label><br>
+        <input type="radio" id="q2_false" name="q2" value="False">
+        <label for="q2_false">False</label><br><br>
+    </div>
+
+    <div id='q2_error' style='display: none'>
+        <p style='color: red;'>Incorrect, you will indeed be randomly assigned to a new person each of the 3 rounds. Try again. </p>
+    </div>
+
+    <div id='q3' style='display: none'>
+        <p> 3. BLUE goes first</p>
+        <input type="radio" id="q3_true" name="q3" value="True">
+        <label for="q2_true">True</label><br>
+        <input type="radio" id="q3_false" name="q3" value="False">
+        <label for="q2_false">False</label><br><br>
+    </div>
+
+    <div id='q3_error' style='display: none'>
+        <p style='color: red;'>Incorrect, you will only receive payment for 1 of the 3 games, randomly chosen at the end of the experiment. Try again. </p>
+    </div>
+
+    <div id='q4' style='display: none'>
+        <p> 4. If RED selects CONTINUE and then BLUE selects END, BLUE will receive </p>
+        <input type="text" id="q4_ans"/>
+        <p> LD</p>
+    </div>
+
+    <div id='q4_error' style='display: none'>
+        <p style='color: red;'>Incorrect. Try again. </p>
+    </div>
+
+    <div id='q5' style='display: none'>
+        <p> 5. BLUE goes first</p>
+    </div>
+
+    <div id='q5_error' style='display: none'>
+        <p style='color: red;'>Incorrect. Try again. </p>
+    </div>
+
+    <div id='q6' style='display: none'>
+        <p> 6. The game will end after the 6th round regardless of what BLUE chooses </p>
+        <input type="radio" id="q6_true" name="q6" value="True">
+        <label for="q6_true">True</label><br>
+        <input type="radio" id="q6_false" name="q6" value="False">
+        <label for="q6_false">False</label><br><br>
+    </div>
+
+    <div id='q6_error' style='display: none'>
+        <p style='color: red;'>Incorrect, one of the 3 games will indeed be chosen at random for your payment. Try again. </p>
+    </div>
+
+    <button class = 'otree-btn-next btn btn-primary' id='check' type='button' onclick='update()'>
+        Check
+    </button>
+
+
+    <button class = 'otree-btn-next btn btn-primary' id='next' style='visibility: hidden'>
+        Next
+    </button>
+
+    <script>
+        let state = 1;
+        document.getElementById('part1_intro_q1').value = 'False';
+        document.getElementById('part1_intro_q2').value = 'False';
+        document.getElementById('part1_intro_q3').value = 'False';
+        document.getElementById('part1_intro_q6').value = 'False';
+        function update() {
+            switch(state) {
+              case 1:
+                if (document.getElementById('q1_true').checked) {
+                    state = 2;
+                    document.getElementById('q2').style.display = 'block'
+                    document.getElementById('q1_error').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q1_error').style.display = 'block'
+                    document.getElementById('part1_intro_q1').value = 'True';
+                }
+                break;
+
+              case 2:
+                if (document.getElementById('q2_true').checked) {
+                    state = 3;
+                    document.getElementById('q3').style.display = 'block'
+                    document.getElementById('q2_error').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q2_error').style.display = 'block'
+                    document.getElementById('part1_intro_q2').value = 'True';
+                }
+                break;
+
+              case 3:
+                if (document.getElementById('q3_false').checked) {
+                    state = 4;
+                    document.getElementById('q4').style.display = 'block'
+                    document.getElementById('q3_error').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q3_error').style.display = 'block'
+                    document.getElementById('part1_intro_q3').value = 'True';
+                }
+                break;
+
+              case 4:
+                if (document.getElementById('q4_ans') != 1) {
+                    state = 5;
+                    document.getElementById('q5').style.display = 'block'
+                    document.getElementById('q4_error').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q4_error').style.display = 'block'
+                    document.getElementById('part1_intro_q4').value = 'True';
+                }
+                break;
+
+              case 5:
+                if (document.getElementById('q5_ans') != 1) {
+                    state = 6;
+                    document.getElementById('q6').style.display = 'block'
+                    document.getElementById('q5_error').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q5_error').style.display = 'block'
+                    document.getElementById('part1_intro_q5').value = 'True';
+                }
+                break;
+
+              case 6:
+                if (document.getElementById('q6_false').checked) {
+                    state = 7;
+                    document.getElementById('next').style.visibility = 'visible'
+                    document.getElementById('q6_error').style.display = 'none'
+                    document.getElementById('check').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q6_error').style.display = 'block'
+                    document.getElementById('part1_intro_q6').value = 'True';
+                }
+                break;
+
+
+
+              default:
+                break;
+            }
+        }
+    </script>
+
 
     {{ next_button }}
 

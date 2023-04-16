@@ -97,9 +97,6 @@ class Game3Introduction1(Page):
         return player.round_number == 3
 
 
-class Assignment(Page):
-    pass
-
 class WaitForBoth(WaitPage):
     pass
 
@@ -189,5 +186,5 @@ class Results(Page):
 
 
 page_sequence = [Game1Introduction1, Game1Introduction2, Game1Introduction3, Game1Introduction4,
-                 Game2Introduction1, Game3Introduction1, Assignment, WaitForBoth, CentipedeGame,
+                 Game2Introduction1, Game3Introduction1, Game1Rules, Assignment, WaitForBoth, CentipedeGame,
                  Questionnaire, ResultsWaitPage, Results]
