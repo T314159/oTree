@@ -3,34 +3,35 @@
 {{ endblock }}
 {{ block content }}
 
-  <p>You are the RED/BLUE participant. You have been randomly paired with another person: the
-BLUE/RED participant.<p/>
+<p>You are the {{ your_color }} participant. You have been randomly paired with another person: the
+  {{ other_color }} participant.<p/>
 
 <div>
     <table style="margin-top: 4%">
         <tr>
             <td style="width: 45%">
-                <p>BLUE/RED performed in the 3rd
+                <p>{{ other_color }} performed in the {{ other_quartile }}
                   Quartile. This means that they scored higher than
-                  between 50% and 75% of participants in the lab. <p/>
+                  between {{ quartile_range }} of participants in the lab. <p/>
             </td>
             <td style="padding-left: 2%">
-<!--                TODO: if __ == 1 and other conditionals-->
-                <img class="image" src="{{ static 'centipede_game/quartile1.png' }}" style="width:100%;"/>
+                <img class="image" src="{{ static image_path }}" style="width:100%;"/>
             </td>
         </tr>
     </table>
 </div>
 
+{{ if player.id_in_group == 1 }}
 <p> Your will go first. </p>
-
+{{ else }}
 <p> Your will go second. </p>
+{{ endif }}
 
 <p>Click “ready” when you are ready to begin. Game 1 will begin once both participants click
 “ready.”</p>
 
 
-    {{ next_button }}
+{{ next_button }}
 
 
 {{ endblock }}

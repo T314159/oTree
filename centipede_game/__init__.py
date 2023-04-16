@@ -150,7 +150,33 @@ class Game1Rules(Page):
 
 
 class Assignment(Page):
-    pass
+    def vars_for_template(player: Player):
+        for other in player.get_others_in_group():
+            if other.participant.raven_percentile <= 25:
+                other_quartile = "1st"
+                quartile_range = "0% and 25%"
+            elif other.participant.raven_percentile <= 50:
+                other_quartile = "2nd"
+                quartile_range = "25% and 50%"
+            elif other.participant.raven_percentile <= 75:
+                other_quartile = "3rd"
+                quartile_range = "50% and 75%"
+            else:
+                other_quartile = "4th"
+                quartile_range = "75% and 100%"
+        if player.id_in_group == 1:
+            your_color = "RED"
+            other_color = "BLUE"
+        else:
+            your_color = "BLUE"
+            other_color = "RED"
+        return dict(
+            other_quartile = other_quartile,
+            quartile_range = quartile_range,
+            image_path='centipede_game/quartile' + str( round((other.participant.raven_percentile+12.5)/25.0) ) + '.png',
+            your_color=your_color,
+            other_color=other_color
+        )
 
 
 class ResultsWaitPage(WaitPage):
