@@ -60,9 +60,5 @@ class ResultsWaitPage(WaitPage):
     pass
 
 
-class Results(Page):
-    pass
-
-
-page_sequence = [IntroAndPayment, ResultsWaitPage, Results]
+page_sequence = [IntroAndPayment, ResultsWaitPage]
 

@@ -33,7 +33,7 @@ SESSION_CONFIGS = [
         name='IQ_and_rational_behavior_3',
         display_name="IQ and Rational Behavior (just part 3)",
         app_sequence=['IQ_and_rational_behavior_part3'],
-        num_demo_participants=1
+        num_demo_participants=2
     ),
     dict(
         name='centipede_game',
@@ -53,7 +53,7 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = ['unique_id', 'control', 'game1', 'game2', 'game3', 'raven_results', 'raven_score', 'raven_percentile',
-                      'lottery_choice', 'dictator_choice', 'dictator_from_other', 'BI_choice']
+                      'lottery_choice', 'dictator_choice', 'dictator_from_others', 'BI_choice']
 SESSION_FIELDS = []
 
 # ISO-639 code

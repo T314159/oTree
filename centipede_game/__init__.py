@@ -145,6 +145,14 @@ class Questionnaire(Page):
         if len(values['ans3']) < 50:
             return 'Please expand a little more for Question 3'
 
+class Game1Rules(Page):
+    pass
+
+
+class Assignment(Page):
+    pass
+
+
 class ResultsWaitPage(WaitPage):
     pass
 
