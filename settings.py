@@ -53,7 +53,7 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = ['unique_id', 'control', 'game1', 'game2', 'game3', 'raven_results', 'raven_score', 'raven_percentile',
-                      'lottery_choice', 'dictator_choice', 'dictator_from_others', 'BI_choice']
+                      'lottery_choice', 'dictator_choice', 'dictator_from_others', 'BI_choice', 'expiry']
 SESSION_FIELDS = []
 
 # ISO-639 code

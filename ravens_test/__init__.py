@@ -45,10 +45,21 @@ class PatternExplanation(Page):
     def is_displayed(player: Player):
         return player.round_number == 1
 
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        import time
+        player.participant.expiry = time.time() + 8 * 60
+
 
 class RavensQuestions(Page):
     form_model = 'player'
     form_fields = ['img_choice']
+
+    @staticmethod
+    def get_timeout_seconds(player):
+        participant = player.participant
+        import time
+        return participant.expiry - time.time()
 
     @staticmethod
     def vars_for_template(player: Player):

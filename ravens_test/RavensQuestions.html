@@ -1,4 +1,12 @@
 {{ block content }}
+<style>
+.otree-timer {
+    display: none;
+}
+</style>
+
+    <p align="right">You have <span id="time-left"></span> seconds left.</p>
+
 
     <div style="float:left; width:50%;">
     <img class="image" src="{{ static question_data.path }}" alt="test_image alt" style="width:100%;"/>
@@ -20,5 +28,19 @@
 
     <br>
     {{ next_button }}
+
+
+    <script>
+        let customTimerEle = document.getElementById('time-left');
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            $('.otree-timer__time-left').on('update.countdown', function (event) {
+                let minutes = Math.floor(event.offset.totalSeconds/60);
+                let seconds = event.offset.totalSeconds%60;
+                customTimerEle.innerText = minutes + ":" + String(seconds).padStart(2, '0');
+            });
+        });
+
+    </script>
 
 {{ endblock }}
