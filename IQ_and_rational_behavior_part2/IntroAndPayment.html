@@ -42,9 +42,14 @@ Game 3, and Game 2 was randomly chosen, you would receive 600LD. </p>
         <label for="q1_false">False</label><br><br>
     </div>
 
+    <div id='q1_correct' style='display: none'>
+        <p style='color: green;'>Correct </p>
+    </div>
+
     <div id='q1_error' style='display: none'>
         <p style='color: red;'>Incorrect, you will be paired with a different person for each of the 3 rounds of this game. Try again.</p>
     </div>
+
 
     <div id='q2' style='display: none'>
         <p> 2. I will be randomly assigned to a new person for each game</p>
@@ -54,9 +59,14 @@ Game 3, and Game 2 was randomly chosen, you would receive 600LD. </p>
         <label for="q2_false">False</label><br><br>
     </div>
 
+    <div id='q2_correct' style='display: none'>
+        <p style='color: green;'>Correct </p>
+    </div>
+
     <div id='q2_error' style='display: none'>
         <p style='color: red;'>Incorrect, you will indeed be randomly assigned to a new person each of the 3 rounds. Try again. </p>
     </div>
+
 
     <div id='q3' style='display: none'>
         <p> 3. I will receive payment for every game I complete</p>
@@ -66,9 +76,14 @@ Game 3, and Game 2 was randomly chosen, you would receive 600LD. </p>
         <label for="q3_false">False</label><br><br>
     </div>
 
+    <div id='q3_correct' style='display: none'>
+        <p style='color: green;'>Correct </p>
+    </div>
+
     <div id='q3_error' style='display: none'>
         <p style='color: red;'>Incorrect, you will only receive payment for 1 of the 3 games, randomly chosen at the end of the experiment. Try again. </p>
     </div>
+
 
     <div id='q4' style='display: none'>
         <p> 4. One of the 3 games will be chosen at random for my payment</p>
@@ -78,9 +93,15 @@ Game 3, and Game 2 was randomly chosen, you would receive 600LD. </p>
         <label for="q4_false">False</label><br><br>
     </div>
 
+    <div id='q4_correct' style='display: none'>
+        <p style='color: green;'>Correct </p>
+    </div>
+
     <div id='q4_error' style='display: none'>
         <p style='color: red;'>Incorrect, one of the 3 games will indeed be chosen at random for your payment. Try again. </p>
     </div>
+
+
 
     <button class = 'otree-btn-next btn btn-primary' id='check' type='button' onclick='update()'>
         Check
@@ -107,6 +128,7 @@ Game 3, and Game 2 was randomly chosen, you would receive 600LD. </p>
               case 1:
                 if (document.getElementById('q1_false').checked) {
                     state = 2;
+                    document.getElementById('q1_correct').style.display = 'block'
                     document.getElementById('q2').style.display = 'block'
                     document.getElementById('q1_error').style.display = 'none'
                 }
@@ -117,8 +139,10 @@ Game 3, and Game 2 was randomly chosen, you would receive 600LD. </p>
                 break;
 
               case 2:
+                document.getElementById('q1_correct').style.display = 'none'
                 if (document.getElementById('q2_true').checked) {
                     state = 3;
+                    document.getElementById('q2_correct').style.display = 'block'
                     document.getElementById('q3').style.display = 'block'
                     document.getElementById('q2_error').style.display = 'none'
                 }
@@ -129,20 +153,25 @@ Game 3, and Game 2 was randomly chosen, you would receive 600LD. </p>
                 break;
 
               case 3:
+                document.getElementById('q2_correct').style.display = 'none'
                 if (document.getElementById('q3_false').checked) {
                     state = 4;
+                    document.getElementById('q3_correct').style.display = 'block'
                     document.getElementById('q4').style.display = 'block'
                     document.getElementById('q3_error').style.display = 'none'
                 }
                 else {
+                    document.getElementById('correct').style.display = 'none'
                     document.getElementById('q3_error').style.display = 'block'
                     document.getElementById('part1_intro_q3').value = 'True';
                 }
                 break;
 
               case 4:
+                document.getElementById('q3_correct').style.display = 'none'
                 if (document.getElementById('q4_true').checked) {
                     state = 5;
+                    document.getElementById('q4_correct').style.display = 'block'
                     document.getElementById('next').style.visibility = 'visible'
                     document.getElementById('q4_error').style.display = 'none'
                     document.getElementById('check').style.display = 'none'
@@ -157,6 +186,13 @@ Game 3, and Game 2 was randomly chosen, you would receive 600LD. </p>
                 break;
             }
         }
+        $(document).keypress(
+          function(event){
+            if (event.which == '13') {
+              event.preventDefault();
+              update();
+            }
+        });
     </script>
 
 

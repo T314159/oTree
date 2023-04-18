@@ -16,7 +16,6 @@
     {{ for image in image_data }}
         <label style="text-align: left; width:24%">
             <img src="{{ static image.path }}" width="100%">
-<!--            <br>-->
             <input type="radio" name="img_choice" value="{{ image.name }}" class="persist">
         </label>
     {{ endfor }}
@@ -34,10 +33,6 @@
         let customTimerEle = document.getElementById('time-left');
 
         document.addEventListener("DOMContentLoaded", function (event) {
-            if(event.offset.totalSeconds <= 0){
-
-            }
-
             $('.otree-timer__time-left').on('update.countdown', function (event) {
                 let minutes = Math.floor(event.offset.totalSeconds/60);
                 let seconds = event.offset.totalSeconds%60;

@@ -24,7 +24,18 @@
         </tr>
     </table>
 
-    {{ next_button }}
+    <button class = 'otree-btn-next btn btn-primary' id='next'>
+        Next
+    </button>
+
+    <script>
+        document.getElementById("next").disabled = true;
+        setTimeout(() => {
+          document.getElementById("next").disabled = false;
+        }, "10000");
+    </script>
+
+
 
 
 {{ endblock }}

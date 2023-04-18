@@ -49,11 +49,17 @@ class PatternExplanation(Page):
     def before_next_page(player: Player, timeout_happened):
         import time
         player.participant.expiry = time.time() + 8 * 60
+        player.participant.raven_results = [0] * C.NUM_ROUNDS
 
 
 class RavensQuestions(Page):
     form_model = 'player'
     form_fields = ['img_choice']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        import time
+        return player.participant.expiry > time.time()
 
     @staticmethod
     def get_timeout_seconds(player):
@@ -69,17 +75,10 @@ class RavensQuestions(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         if timeout_happened:
-            # you may want to fill a default value for any form fields,
-            # because otherwise they may be left null.
-            player.xyz = False
-            #TODO: add rest of rounds in
-
-        if player.round_number == 1:
-            player.participant.raven_results = [0]*C.NUM_ROUNDS
+            player.img_choice = "-1"
         if int(player.img_choice[1]) == C.CORRECT_ANSWERS[player.round_number-1]:
             player.participant.raven_results[player.round_number-1] = 1
-        if player.round_number == C.NUM_ROUNDS:
-            player.participant.raven_score = sum(player.participant.raven_results)
+
 
 
 class End(Page):
@@ -88,6 +87,7 @@ class End(Page):
         return player.round_number == C.NUM_ROUNDS
 
     def vars_for_template(player: Player):
+        player.participant.raven_score = sum(player.participant.raven_results)
         return dict(raven_results=player.participant.raven_results,
                     raven_score=player.participant.raven_score)
 
@@ -106,6 +106,7 @@ class ResultsWaitPage(WaitPage):
                 elif other_player.participant.raven_score == player.participant.raven_score:
                     less_than += 0.5
             player.participant.raven_percentile = round(100 * less_than / (len(group.get_players())-1))
-
+            if player.participant.raven_percentile > 99.5: player.participant.raven_percentile = 99.5
+            if player.participant.raven_percentile < 0.5: player.participant.raven_percentile = 0.5
 
 page_sequence = [PatternExplanation, RavensQuestions, End, ResultsWaitPage]
