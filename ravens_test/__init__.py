@@ -68,6 +68,12 @@ class RavensQuestions(Page):
 
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
+        if timeout_happened:
+            # you may want to fill a default value for any form fields,
+            # because otherwise they may be left null.
+            player.xyz = False
+            #TODO: add rest of rounds in
+
         if player.round_number == 1:
             player.participant.raven_results = [0]*C.NUM_ROUNDS
         if int(player.img_choice[1]) == C.CORRECT_ANSWERS[player.round_number-1]:

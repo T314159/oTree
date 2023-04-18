@@ -34,6 +34,10 @@
         let customTimerEle = document.getElementById('time-left');
 
         document.addEventListener("DOMContentLoaded", function (event) {
+            if(event.offset.totalSeconds <= 0){
+
+            }
+
             $('.otree-timer__time-left').on('update.countdown', function (event) {
                 let minutes = Math.floor(event.offset.totalSeconds/60);
                 let seconds = event.offset.totalSeconds%60;

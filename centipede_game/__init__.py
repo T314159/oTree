@@ -110,9 +110,9 @@ class CentipedeGame(Page):
 
     def live_method(player: Player, data):
         if player.id_in_group == 1:
-            return {2: {'choice' : data['choice']}}
+            return {2: {'choice' : data['choice'], 'time-left' : data['time-left']}}
         else:
-            return {1: {'choice' : data['choice']}}
+            return {1: {'choice' : data['choice'], 'time-left' : data['time-left']}}
 
     def before_next_page(player: Player, timeout_happened):
         if player.round_number == 1: payoff = C.payoffs[player.participant.game1]

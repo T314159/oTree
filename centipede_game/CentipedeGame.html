@@ -87,28 +87,37 @@
 
     var turn = 1;
     function func_continue(){
+        let now = new Date().getTime();
+        let distance = Math.floor((expires - now)/1000);
+
         turn += 1;
-        liveSend({'choice': 'Continue'});
+        liveSend({'choice': 'Continue', 'time-left': distance});
         update();
     }
 
     function func_stop(){
-        liveSend({'choice': 'Stop'});
+        let now = new Date().getTime();
+        let distance = Math.floor((expires - now)/1000);
+
+        liveSend({'choice': 'Stop', 'time-left': distance});
         document.getElementById('end_turn').value = turn;
         form = document.getElementById('form');
         form.submit();
     }
 
     function liveRecv(data){
-        if (data['choice'] == 'Continue'){
-            turn += 1;
-            update();
+        setTimeout(()=> {
+            if (data['choice'] == 'Continue'){
+                turn += 1;
+                update();
+            }
+            else if (data['choice'] == 'Stop'){
+                document.getElementById('end_turn').value = turn;
+                form = document.getElementById("form");
+                form.submit();
+            }
         }
-        else if (data['choice'] == 'Stop'){
-            document.getElementById('end_turn').value = turn;
-            form = document.getElementById("form");
-            form.submit();
-        }
+        ,data['time-left']*1000);
     }
 
     function update(){
@@ -136,7 +145,7 @@
             document.getElementById('stop').style.display = 'block';
         }
         else{
-            document.getElementById('time-tag').innerText = "Please wait 30 seconds for the other player to complete their turn.";
+            document.getElementById('time-tag').innerText = "Please wait for the other player to complete their turn. (The computer will wait the full 30 seconds on their turn regardless of how long they take to make their decision.)";
             document.getElementById('time-left').style.display = 'none';
             document.getElementById('continue').style.display = 'none';
             document.getElementById('stop').style.display = 'none';
