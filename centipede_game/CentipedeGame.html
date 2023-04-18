@@ -15,50 +15,60 @@
         padding-right: 0px;
     }
 
-    .bottom-left {
+    .top-right {
       position: absolute;
-      bottom: 8px;
-      left: 16px;
+      top: 30%;
+      right: 5%;
     }
     </style>
 
 <main id='main' style="margin: 0px">
-    <p align="right">You have <span id="time-left"> 30 </span> seconds left.</p>
+    <table>
+        <tr>
+            <td rowspan="2">
+                <img class="image" src="{{ static 'centipede_game/image.png' }}" alt="test_image alt" style="width:90%;"/>
+            </td>
+            <td>
+                <p id="time-tag">Time Remaining</p>
+                <span id="time-left"> 30 </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="turn_1"> Turn 1</p>
 
-    <div class="container">
-      <img class="image" src="{{ static 'centipede_game/image.png' }}" alt="test_image alt" style="width:90%;"/>
-      <div class="bottom-left">Bottom Left</div>
-    </div>
+                <div id="turn_2" style="display: none">
+                    <p> Turn 2</p>
+                </div>
 
-    <p class="turn_1"> Turn 1</p>
+                <div id="turn_3" style="display: none">
+                    <p> Turn 3</p>
+                </div>
 
-    <div id="turn_2" style="display: none">
-        <p> Turn 2</p>
-    </div>
+                <div id="turn_4" style="display: none">
+                    <p> Turn 4</p>
+                </div>
 
-    <div id="turn_3" style="display: none">
-        <p> Turn 3</p>
-    </div>
+                <div id="turn_5" style="display: none">
+                    <p> Turn 5</p>
+                </div>
 
-    <div id="turn_4" style="display: none">
-        <p> Turn 4</p>
-    </div>
+                <div id="turn_6" style="display: none">
+                    <p> Turn 6</p>
+                </div>
 
-    <div id="turn_5" style="display: none">
-        <p> Turn 5</p>
-    </div>
+                <button class = 'otree-btn-next btn btn-primary' id='continue' type='button' onclick='func_continue()' style="display: none">
+                    Continue
+                </button>
 
-    <div id="turn_6" style="display: none">
-        <p> Turn 6</p>
-    </div>
+                <button class = 'otree-btn-next btn btn-primary' id='stop' type='button' onclick='func_stop()' style="display: none">
+                    Stop
+                </button>
+            </td>
+        </tr>
+    </table>
 
-    <button class = 'otree-btn-next btn btn-primary' id='continue' type='button' onclick='func_continue()' style="display: none">
-        Continue
-    </button>
 
-    <button class = 'otree-btn-next btn btn-primary' id='stop' type='button' onclick='func_stop()' style="display: none">
-        Stop
-    </button>
 </main>
 
 <input type='hidden' name='end_turn' id='end_turn' />
@@ -102,7 +112,6 @@
     }
 
     function update(){
-        expires = new Date().getTime() + 30500;
         switch(turn) {
           case 6:
             document.getElementById('turn_6').style.display = 'block';
@@ -120,10 +129,15 @@
             break;
         }
         if( (turn%2) == (js_vars.my_id%2) ){
+            expires = new Date().getTime() + 30500;
+            document.getElementById('time-tag').innerText = "Time Remaining";
+            document.getElementById('time-left').style.display = 'block';
             document.getElementById('continue').style.display = 'block';
             document.getElementById('stop').style.display = 'block';
         }
         else{
+            document.getElementById('time-tag').innerText = "Please wait 30 seconds for the other player to complete their turn.";
+            document.getElementById('time-left').style.display = 'none';
             document.getElementById('continue').style.display = 'none';
             document.getElementById('stop').style.display = 'none';
         }
