@@ -75,9 +75,11 @@ class Results(Page):
         for question_index in selected:
             if player.participant.ravens_results[question_index] == 1:
                 part1_earned += 100
+        part1_text = part1_earned
 
         part2_selected = random.randint(1,3)
         # Get info from past.
+        part2_text = part2_earned
 
         part3_selected = random.choice(["Lottery", "Allocation", "Reasoning"])
         if selected == "Lottery":
@@ -90,6 +92,7 @@ class Results(Page):
         else:
             if player.BI_choice == 1:
                 part3_earned = 100
+        part3_text = part3_earned
 
         return dict(
             part1_text = part1_text,
