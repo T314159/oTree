@@ -1,8 +1,42 @@
 {{ block title }}
-    Page title
+    End of Experiment
 {{ endblock }}
 
 {{ block content }}
+<style>
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align:center;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+  text-align:center;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<p>Thank you for participating in today’s experiment. </p>
+<p> You earned: </p>
+
+<table class='center'>
+  <tr>  <td> Show up fee </td> <td> 140 </td>  </tr>
+  <tr>  <td> Part 1 Bonus (__ questions correct) </td> <td> 180 </td>  </tr>
+  <tr>  <td> Part 2 (Game __ chosen randomly, ended turn __) </td> <td> 100 </td> </tr>
+  <tr>  <td> Part 3 (__ Choice Selected randomly, ) </td> <td> 80 </td> </tr>
+</table>
 
     {{ next_button }}
 {{ endblock }}
