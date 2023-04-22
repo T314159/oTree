@@ -1,5 +1,27 @@
 {{ block content }}
 <style>
+.otree-title {
+    font-size: 40px;
+    text-align: center;
+    padding: 5% 0% 2% 0%;
+}
+.otree-body {
+    max-width:1500px
+}
+.otree-btn-next {
+    float: right;
+    margin-right: 1%;
+    background-color: #04AA6D;
+    border-color: #04AA6D;
+}
+.otree-btn-next:hover {
+  background-color: #02784D;
+  border-color: #02784D;
+  transition: 0.6s;
+}
+p {
+    font-size: 20px;
+}
 .otree-timer {
     display: none;
 }
@@ -8,11 +30,11 @@
     <p align="right">You have <span id="time-left"></span> seconds left.</p>
 
 
-    <div style="float:left; width:50%;">
+    <div style="float:left; width:45%;">
     <img class="image" src="{{ static question_data.path }}" alt="test_image alt" style="width:100%;"/>
     </div>
 
-    <div style="float:left; width:50%;">
+    <div style="float:left; padding-left:4%; padding-top:2%; width:51%;">
     {{ for image in image_data }}
         <label style="text-align: left; width:24%">
             <img src="{{ static image.path }}" width="100%">
