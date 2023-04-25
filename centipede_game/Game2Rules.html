@@ -1,0 +1,98 @@
+{{ block title }}
+    Game 1 Rules
+{{ endblock }}
+{{ block content }}
+    <style>
+    .form-inline {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+    }
+    </style>
+
+    <p> Once again, you will have 30 seconds to make a decision on your turn, with a timer appearing in
+    the upper right corner of the display. You must select an option in this time frame. The other
+    participant will also have 30 seconds to make their decision. Regardless of how long they take to
+    select their choice, the computer will wait the full 30 seconds before either continuing to your
+    turn or ending the game.</p>
+
+    <p> Please answer a quiz question about Game 2: </p>
+
+    <div id='questions'> </div>
+
+    <div id='q1'>
+        <p> 1. There are 2 choices on each turn </p>
+        <input type="radio" id="q1_true" name="q1" value="True">
+        <label for="q1_true">True</label><br>
+        <input type="radio" id="q1_false" name="q1" value="False">
+        <label for="q1_false">False</label><br><br>
+    </div>
+
+    <div id='q1_correct' style='display: none'>
+        <p style='color: green;'>Correct </p>
+    </div>
+
+    <div id='q1_error' style='display: none'>
+        <p style='color: red;'>Incorrect, this statement is True. Each turn there are 2 choices: CONTINUE or STOP. Try Again.</p>
+    </div>
+
+    <br>
+    <button class = 'otree-btn-next btn btn-primary' id='check' type='button' onclick='update()'>
+        Check
+    </button>
+
+    <input type='hidden' name='part1_intro_q1' id='part1_intro_q1' />
+
+    <button class = 'otree-btn-next btn btn-primary' id='next' style='visibility: visible'>
+        Next
+    </button>
+
+    <script>
+        let state = 1;
+        document.getElementById('part1_intro_q1').value = 'False';
+        function update() {
+            switch(state) {
+              case 1:
+                if (document.getElementById('q1_true').checked) {
+                    state = 2;
+                    document.getElementById('q1_correct').style.display = 'block'
+                    document.getElementById('q2').style.display = 'block'
+                    document.getElementById('q1_error').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q1_error').style.display = 'block'
+                    document.getElementById('part1_intro_q1').value = 'True';
+                }
+                break;
+
+              case 7:
+                document.getElementById('q5_correct').style.display = 'none'
+                if (document.getElementById('q7a_ans').value == "1280" && document.getElementById('q7b_ans').value == "640") {
+                    state = 8;
+                    document.getElementById('q7_correct').style.display = 'block'
+                    document.getElementById('next').style.visibility = 'visible'
+                    document.getElementById('q7_error').style.display = 'none'
+                    document.getElementById('check').style.display = 'none'
+                }
+                else {
+                    document.getElementById('q7_error').style.display = 'block'
+                    document.getElementById('part1_intro_q7').value = 'True';
+                }
+                break;
+
+              default:
+                break;
+            }
+        }
+        $(document).keypress(
+          function(event){
+            if (event.which == '13') {
+              event.preventDefault();
+              update();
+            }
+        });
+    </script>
+
+
+{{ endblock }}
+

@@ -87,7 +87,17 @@ class Game2Introduction1(Page):
     def is_displayed(player: Player):
         return player.round_number == 2
 
+class Game2Introduction2(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 2
+
 class Game3Introduction1(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 3
+
+class Game3Introduction2(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 3
@@ -245,5 +255,6 @@ class ResultsWaitPage(WaitPage):
 
 
 page_sequence = [Game1Introduction1, Game1Introduction2, Game1Introduction3, Game1Introduction4,
-                 Game2Introduction1, Game3Introduction1, Game1Rules, Assignment, WaitForBoth, CentipedeGameStandard,
+                 Game2Introduction1, Game2Introduction2, Game3Introduction1, Game3Introduction2,
+                 Game1Rules, Assignment, WaitForBoth, CentipedeGameStandard,
                  CentipedeGameLinear, CentipedeGameConstant, Questionnaire, ResultsWaitPage]

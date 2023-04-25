@@ -1,5 +1,5 @@
 {{ block title }}
-    Game 2
+    Game 3
 {{ endblock }}
 {{ block content }}
 
@@ -28,27 +28,26 @@
         <tr>
             <td style="width: 40%">
 
-                <p>Game 2 will be conducted in a similar fashion as Game 1.</p>
+                <p>Game 3 will be conducted in a similar fashion as Game 1.</p>
                 <p>Once again, the game starts on RED’s turn who has two choices shown by the red lines:
                 CONTINUE or STOP. If RED continues, BLUE now has the same two choices illustrated by
                 blue lines.</p>
-                {{ if player.participant.game2 == 'constant' }}
-                <p>The difference in Game 2 is the number of LD each participant receives at the different possible
-                game endings. Between each turn of Game 1, the piles of money are first doubled. Then, the two
-                piles are swapped. In Game 2, 100LD is removed from the smaller pile and 100LD is added to
-                the larger pile. Then, the two piles are swapped. This is shown in the figure to the right.
+                {{ if player.participant.game2 == 'linear' }}
+                <p>The difference in Game 3 is the number of lab dollars each participant receives at the different
+                possible game endings. In Game 3, 100LD is added to both piles before the piles are swapped.
+                This is shown in the figure to the right.
                 </p>
                 {{ endif }}
 
             </td>
             <td style="padding-left: 2%">
-                {{ if player.participant.game2 == 'standard' }}
+                {{ if player.participant.game3 == 'standard' }}
                     <img class="image" src="{{ static 'centipede_game/Game1StandardExplanation2.png' }}" style="width:100%;"/>
                 {{ endif }}
-                {{ if player.participant.game2 == 'constant' }}
+                {{ if player.participant.game3 == 'constant' }}
                     <img class="image" src="{{ static 'centipede_game/Game1ConstantExplanation2.png' }}" style="width:100%;"/>
                 {{ endif }}
-                {{ if player.participant.game2 == 'linear' }}
+                {{ if player.participant.game3 == 'linear' }}
                     <img class="image" src="{{ static 'centipede_game/Game1LinearExplanation2.png' }}" style="width:100%;"/>
                 {{ endif }}
             </td>

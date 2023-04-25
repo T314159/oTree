@@ -27,21 +27,22 @@
     <table style="margin-top: 4%">
         <tr>
             <td style="width: 40%">
-                {{ if player.participant.game2 == 'constant' and player.participant.game1 == 'standard' }}
-                <p> <b>A key difference</b> for Game 2 versus Game 1 is that the combined payment to RED and BLUE is no
-                longer increasing, but rather <b>staying constant</b>. The game flow and the payments for different
-                combinations of choices are shown in the figure below. Understanding the new payments is crucial,
-                so please take a few minutes to look over the following figure. </p>
+                {{ if player.participant.game3 == 'linear' }}
+                <p>A <b> key difference </b> with Game 3 is that the combined payment to RED and BLUE is increasing,
+                but in a linear fashion, meaning it is <b> increased by the same amount each turn </b>. The game flow and
+                the payments for different combinations of choices are shown in the figure below. Understanding
+                the new payments is crucial. So please take a few minutes to look over the following figure. </p>
                 {{ endif }}
+
             </td>
             <td style="padding-left: 2%">
-                {{ if player.participant.game2 == 'standard' }}
+                {{ if player.participant.game3 == 'standard' }}
                     <img class="image" src="{{ static 'centipede_game/exp6.png' }}" style="width:100%;"/>
                 {{ endif }}
-                {{ if player.participant.game2 == 'constant' }}
+                {{ if player.participant.game3 == 'constant' }}
                     <img class="image" src="{{ static 'centipede_game/con6.png' }}" style="width:100%;"/>
                 {{ endif }}
-                {{ if player.participant.game2 == 'linear' }}
+                {{ if player.participant.game3 == 'linear' }}
                     <img class="image" src="{{ static 'centipede_game/lin6.png' }}" style="width:100%;"/>
                 {{ endif }}
             </td>
