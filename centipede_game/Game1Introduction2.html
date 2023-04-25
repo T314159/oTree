@@ -19,11 +19,32 @@
                 receiving 80LD.
                 </p>
                 {{ endif }}
+                {{ if player.participant.game1 == 'constant' }}
+                <p>BLUE faces similar choices, represented by the blue lines. BLUE can STOP or CONTINUE. If
+                BLUE chooses STOP, the payments have now changed. Each turn, 100LD is transferred from the larger pile
+                to the smaller pile. Then, the two piles are swapped. So now RED would be receiving 900LD while BLUE
+                would be receiving 700LD.
+                </p>
+                {{ endif }}
+                {{ if player.participant.game1 == 'linear' }}
+                <p>BLUE faces similar choices, represented by the blue lines. BLUE can STOP or CONTINUE. If
+                BLUE chooses STOP, the payments have now changed. Each turn, 100LD is added to both piles and then the
+                piles are swapped. So now RED would be receiving 400LD while BLUE would be receiving 700LD.
+                </p>
+                {{ endif }}
                 <p>If BLUE instead chooses to CONTINUE, the turn passes back to RED. </p>
                 <p> (click 'Next' to advance to it) </p>
             </td>
             <td style="padding-left: 2%">
-                <img class="image" src="{{ static 'centipede_game/tutorial_standard1.png' }}" style="width:100%;"/>
+                {{ if player.participant.game1 == 'standard' }}
+                    <img class="image" src="{{ static 'centipede_game/Game1StandardExplanation2.png' }}" style="width:100%;"/>
+                {{ endif }}
+                {{ if player.participant.game1 == 'constant' }}
+                    <img class="image" src="{{ static 'centipede_game/Game1ConstantExplanation2.png' }}" style="width:100%;"/>
+                {{ endif }}
+                {{ if player.participant.game1 == 'linear' }}
+                    <img class="image" src="{{ static 'centipede_game/Game1LinearExplanation2.png' }}" style="width:100%;"/>
+                {{ endif }}
             </td>
         </tr>
     </table>

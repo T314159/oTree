@@ -16,7 +16,15 @@
                 <p> (click 'Next' to advance) </p>
             </td>
             <td style="padding-left: 2%">
-                <img class="image" src="{{ static 'centipede_game/tutorial_standard1.png' }}" style="width:100%;"/>
+                {{ if player.participant.game1 == 'standard' }}
+                    <img class="image" src="{{ static 'centipede_game/Game1StandardExplanation3.png' }}" style="width:100%;"/>
+                {{ endif }}
+                {{ if player.participant.game1 == 'constant' }}
+                    <img class="image" src="{{ static 'centipede_game/Game1ConstantExplanation3.png' }}" style="width:100%;"/>
+                {{ endif }}
+                {{ if player.participant.game1 == 'linear' }}
+                    <img class="image" src="{{ static 'centipede_game/Game1LinearExplanation3.png' }}" style="width:100%;"/>
+                {{ endif }}
             </td>
         </tr>
     </table>

@@ -249,7 +249,6 @@ class Results(Page):
     pass
 
 
-
 page_sequence = [Game1Introduction1, Game1Introduction2, Game1Introduction3, Game1Introduction4,
-                 Game2Introduction1, Game3Introduction1, Game1Rules, Assignment, WaitForBoth, CentipedeGame,
-                 Questionnaire, ResultsWaitPage, Results]
+                 Game2Introduction1, Game3Introduction1, Game1Rules, Assignment, WaitForBoth, CentipedeGameStandard,
+                 CentipedeGameLinear, CentipedeGameConstant, Questionnaire, ResultsWaitPage, Results]
