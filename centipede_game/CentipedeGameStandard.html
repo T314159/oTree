@@ -1,0 +1,193 @@
+{{ block title }}
+    Game {{ player.round_number }}
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-title {
+        font-size: 40px;
+        text-align: center;
+        padding: 5% 0% 2% 0%;
+    }
+    .otree-body {
+        max-width:1200px
+    }
+    .otree-btn-next {
+        float: right;
+        margin-right: 1%;
+        background-color: #04AA6D;
+        border-color: #04AA6D;
+    }
+    .otree-btn-next:hover {
+      background-color: #02784D;
+      border-color: #02784D;
+      transition: 0.6s;
+    }
+    .otree-btn-next:active {
+      background-color: #02784D;
+      border-color: #02784D;
+    }
+    .otree-btn-next:focus {
+      background-color: #02784D;
+      border-color: #02784D;
+    }
+    p {
+        font-size: 20px;
+    }
+
+    .otree-body{
+        width: 70%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .top-right {
+      position: absolute;
+      top: 30%;
+      right: 5%;
+    }
+    </style>
+
+<main id='main' style="margin: 0px">
+    <table>
+        <tr>
+            <td rowspan="2" width="80%">
+                <div id="turn_1" style="display: block">
+                 <img class="image" src="{{ static 'centipede_game/exp1.png' }}" alt="test_image alt" style="width:90%;"/>
+                </div>
+
+                <div id="turn_2" style="display: none">
+                 <img class="image" src="{{ static 'centipede_game/exp2.png' }}" alt="test_image alt" style="width:90%;"/>
+                </div>
+
+                <div id="turn_3" style="display: none">
+                 <img class="image" src="{{ static 'centipede_game/exp3.png' }}" alt="test_image alt" style="width:90%;"/>
+                </div>
+
+                <div id="turn_4" style="display: none">
+                 <img class="image" src="{{ static 'centipede_game/exp4.png' }}" alt="test_image alt" style="width:90%;"/>
+                </div>
+
+                <div id="turn_5" style="display: none">
+                 <img class="image" src="{{ static 'centipede_game/exp5.png' }}" alt="test_image alt" style="width:90%;"/>
+                </div>
+
+                <div id="turn_6" style="display: none">
+                 <img class="image" src="{{ static 'centipede_game/exp6.png' }}" alt="test_image alt" style="width:90%;"/>
+                </div>
+
+            </td>
+            <td>
+                <p id="time-tag">Time Remaining</p>
+                <span id="time-left"> 30 </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class = 'otree-btn-next btn btn-primary' id='continue' type='button' onclick='func_continue()' style="display: none">
+                    Continue
+                </button>
+
+                <button class = 'otree-btn-next btn btn-primary' id='stop' type='button' onclick='func_stop()' style="display: none">
+                    Stop
+                </button>
+            </td>
+        </tr>
+    </table>
+
+
+</main>
+
+<input type='hidden' name='end_turn' id='end_turn' />
+{{ formfield_errors 'end_turn' }}
+
+{{ endblock }}
+
+{{ block script }}
+<script>
+var expires = new Date().getTime() + 30500;
+setInterval(function () {
+    let now = new Date().getTime();
+    let distance = Math.floor((expires - now)/1000);
+    document.getElementById('time-left').innerText = distance;
+}, 500);
+
+var turn = 1;
+function func_continue(){
+    let now = new Date().getTime();
+    let distance = Math.floor((expires - now)/1000);
+
+    turn += 1;
+    liveSend({'choice': 'Continue', 'time-left': distance});
+    update();
+}
+
+function func_stop(){
+    let now = new Date().getTime();
+    let distance = Math.floor((expires - now)/1000);
+
+    liveSend({'choice': 'Stop', 'time-left': distance});
+    document.getElementById('end_turn').value = turn;
+    form = document.getElementById('form');
+    form.submit();
+}
+
+function liveRecv(data){
+    setTimeout(()=> {
+        if (data['choice'] == 'Continue'){
+            turn += 1;
+            update();
+        }
+        else if (data['choice'] == 'Stop'){
+            document.getElementById('end_turn').value = turn;
+            form = document.getElementById("form");
+            form.submit();
+        }
+    }
+    ,data['time-left']*1000);
+}
+
+function update(){
+    switch(turn) {
+      case 6:
+        document.getElementById('turn_6').style.display = 'block';
+        document.getElementById('turn_5').style.display = 'none';
+      case 5:
+        document.getElementById('turn_5').style.display = 'block';
+        document.getElementById('turn_4').style.display = 'none';
+        break;
+      case 4:
+        document.getElementById('turn_4').style.display = 'block';
+        document.getElementById('turn_3').style.display = 'none';
+        break;
+      case 3:
+        document.getElementById('turn_2').style.display = 'none';
+        document.getElementById('turn_3').style.display = 'block';
+        break;
+      case 2:
+        document.getElementById('turn_1').style.display = 'none';
+        document.getElementById('turn_2').style.display = 'block';
+      default:
+        break;
+    }
+    if( (turn%2) == (js_vars.my_id%2) ){
+        expires = new Date().getTime() + 30500;
+        document.getElementById('time-tag').innerText = "Time Remaining";
+        document.getElementById('time-left').style.display = 'block';
+        document.getElementById('continue').style.display = 'block';
+        document.getElementById('stop').style.display = 'block';
+    }
+    else{
+        document.getElementById('time-tag').innerText = "Please wait for the other player to complete their turn. (The computer will wait the full 30 seconds on their turn regardless of how long they take to make their decision.)";
+        document.getElementById('time-left').style.display = 'none';
+        document.getElementById('continue').style.display = 'none';
+        document.getElementById('stop').style.display = 'none';
+    }
+}
+
+update();
+</script>
+{{ endblock }}
+
+

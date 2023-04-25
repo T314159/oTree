@@ -11,10 +11,6 @@ class C(BaseConstants):
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 3
 
-    import random
-    matrix = [i for i in range(1, 12)]
-    random.shuffle(matrix)
-
     payoffs = {
         'standard': [[40, 10], [20, 80], [160, 40], [80, 320], [640, 160], [320, 1280], [2560, 640]],
         'constant': [[800, 800], [700, 900], [1000, 600], [500, 1100], [1200, 400], [300, 1300], [1400, 200]],
@@ -100,9 +96,20 @@ class Game3Introduction1(Page):
 class WaitForBoth(WaitPage):
     pass
 
-class CentipedeGame(Page):
+
+def current_game(player, round_number):
+    if round_number == 1: return player.participant.game1
+    elif round_number == 2: return player.participant.game2
+    elif round_number == 3: return player.participant.game3
+
+
+class CentipedeGameStandard(Page):
     form_model = 'group'
     form_fields = ['end_turn']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return current_game(player, player.round_number) == 'standard'
 
     @staticmethod
     def js_vars(player: Player):
@@ -121,6 +128,61 @@ class CentipedeGame(Page):
 
         player.payoff = payoff[player.group.end_turn-1][player.id_in_group-1]
         player.participant.control = False
+
+
+class CentipedeGameLinear(Page):
+    form_model = 'group'
+    form_fields = ['end_turn']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return current_game(player, player.round_number) == 'linear'
+
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(my_id=player.id_in_group)
+
+    def live_method(player: Player, data):
+        if player.id_in_group == 1:
+            return {2: {'choice' : data['choice'], 'time-left' : data['time-left']}}
+        else:
+            return {1: {'choice' : data['choice'], 'time-left' : data['time-left']}}
+
+    def before_next_page(player: Player, timeout_happened):
+        if player.round_number == 1: payoff = C.payoffs[player.participant.game1]
+        elif player.round_number == 2: payoff = C.payoffs[player.participant.game2]
+        elif player.round_number == 3: payoff = C.payoffs[player.participant.game3]
+
+        player.payoff = payoff[player.group.end_turn-1][player.id_in_group-1]
+        player.participant.control = False
+
+
+class CentipedeGameConstant(Page):
+    form_model = 'group'
+    form_fields = ['end_turn']
+
+    @staticmethod
+    def is_displayed(player: Player):
+        return current_game(player, player.round_number) == 'constant'
+
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(my_id=player.id_in_group)
+
+    def live_method(player: Player, data):
+        if player.id_in_group == 1:
+            return {2: {'choice' : data['choice'], 'time-left' : data['time-left']}}
+        else:
+            return {1: {'choice' : data['choice'], 'time-left' : data['time-left']}}
+
+    def before_next_page(player: Player, timeout_happened):
+        if player.round_number == 1: payoff = C.payoffs[player.participant.game1]
+        elif player.round_number == 2: payoff = C.payoffs[player.participant.game2]
+        elif player.round_number == 3: payoff = C.payoffs[player.participant.game3]
+
+        player.payoff = payoff[player.group.end_turn-1][player.id_in_group-1]
+        player.participant.control = False
+
 
 class Questionnaire(Page):
     form_model = 'player'
@@ -147,6 +209,9 @@ class Game1Rules(Page):
 
 
 class Assignment(Page):
+    def before_next_page(player: Player, timeout_happened):
+        player.current_turn = 1
+
     def vars_for_template(player: Player):
         for other in player.get_others_in_group():
             if other.participant.raven_percentile <= 25:
