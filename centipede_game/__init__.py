@@ -209,8 +209,6 @@ class Game1Rules(Page):
 
 
 class Assignment(Page):
-    def before_next_page(player: Player, timeout_happened):
-        player.current_turn = 1
 
     def vars_for_template(player: Player):
         for other in player.get_others_in_group():
@@ -245,10 +243,7 @@ class ResultsWaitPage(WaitPage):
     pass
 
 
-class Results(Page):
-    pass
-
 
 page_sequence = [Game1Introduction1, Game1Introduction2, Game1Introduction3, Game1Introduction4,
                  Game2Introduction1, Game3Introduction1, Game1Rules, Assignment, WaitForBoth, CentipedeGameStandard,
-                 CentipedeGameLinear, CentipedeGameConstant, Questionnaire, ResultsWaitPage, Results]
+                 CentipedeGameLinear, CentipedeGameConstant, Questionnaire, ResultsWaitPage]

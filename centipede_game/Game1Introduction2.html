@@ -5,13 +5,28 @@
 
     <head>
     <style>
-    h2 {text-align: center;}
+        .otree-title {
+            background: #EEF5FF;
+            font-size: 40px;
+            text-align: center;
+            padding: 5% 0% 2% 0%;
+        }
+        .otree-body {
+            max-width:1600px
+        }
+        .otree-btn-next {
+            float: right;
+            margin-right: 1%;
+        }
+        p {
+            font-size: 20px;
+        }
     </style>
     </head>
 
     <table style="margin-top: 4%">
         <tr>
-            <td style="width: 45%">
+            <td style="width: 40%">
                 {{ if player.participant.game1 == 'standard' }}
                 <p>BLUE faces similar choices, represented by the blue lines. BLUE can STOP or CONTINUE. If
                 BLUE chooses STOP, the payments have now changed. Each turn, the piles are doubled and

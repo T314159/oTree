@@ -1,5 +1,5 @@
 {{ block title }}
-    Game 1
+    Game 2
 {{ endblock }}
 {{ block content }}
 
@@ -27,11 +27,12 @@
     <table style="margin-top: 4%">
         <tr>
             <td style="width: 40%">
-                <p>This alternation can happen up to a maximum of 6 turns, after which, the game is forced to end.
-                The full tree of choices and end payments are shown in the figure below. Please note that both
-                participants see and interact with this full tree of choices. Understanding how the game works is
-                crucial, so please take a few minutes to look over the following figure now although it will also
-                be shown to you during the game.</p>
+                {{ if player.participant.game2 == 'constant' and player.participant.game1 == 'standard' }}
+                <p> <b>A key difference</b> for Game 2 versus Game 1 is that the combined payment to RED and BLUE is no
+                longer increasing, but rather <b>staying constant</b>. The game flow and the payments for different
+                combinations of choices are shown in the figure below. Understanding the new payments is crucial,
+                so please take a few minutes to look over the following figure. </p>
+                {{ endif }}
             </td>
             <td style="padding-left: 2%">
                 {{ if player.participant.game1 == 'standard' }}
