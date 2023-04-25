@@ -21,7 +21,7 @@
     <div id='questions'> </div>
 
     <div id='q1'>
-        <p> 1. There are 2 choices on each turn </p>
+        <p> The combined payment to RED and BLUE increases each turn </p>
         <input type="radio" id="q1_true" name="q1" value="True">
         <label for="q1_true">True</label><br>
         <input type="radio" id="q1_false" name="q1" value="False">
@@ -33,7 +33,7 @@
     </div>
 
     <div id='q1_error' style='display: none'>
-        <p style='color: red;'>Incorrect, this statement is True. Each turn there are 2 choices: CONTINUE or STOP. Try Again.</p>
+        <p style='color: red;'>Incorrect, the total combined payment to RED and BLUE stays the same each turn. Try Again.</p>
     </div>
 
     <br>
@@ -53,30 +53,16 @@
         function update() {
             switch(state) {
               case 1:
-                if (document.getElementById('q1_true').checked) {
+                if (document.getElementById('q1_false').checked) {
                     state = 2;
                     document.getElementById('q1_correct').style.display = 'block'
-                    document.getElementById('q2').style.display = 'block'
                     document.getElementById('q1_error').style.display = 'none'
+                    document.getElementById('next').style.visibility = 'visible'
+                    document.getElementById('check').style.display = 'none'
                 }
                 else {
                     document.getElementById('q1_error').style.display = 'block'
                     document.getElementById('part1_intro_q1').value = 'True';
-                }
-                break;
-
-              case 7:
-                document.getElementById('q5_correct').style.display = 'none'
-                if (document.getElementById('q7a_ans').value == "1280" && document.getElementById('q7b_ans').value == "640") {
-                    state = 8;
-                    document.getElementById('q7_correct').style.display = 'block'
-                    document.getElementById('next').style.visibility = 'visible'
-                    document.getElementById('q7_error').style.display = 'none'
-                    document.getElementById('check').style.display = 'none'
-                }
-                else {
-                    document.getElementById('q7_error').style.display = 'block'
-                    document.getElementById('part1_intro_q7').value = 'True';
                 }
                 break;
 
