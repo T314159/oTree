@@ -59,6 +59,7 @@ class Player(BasePlayer):
     ans2c = models.IntegerField()
     ans3 = models.LongStringField()
     ans4 = models.IntegerField()
+    ans7 = models.IntegerField()
     if not False:
         ans5 = models.LongStringField()
         ans6 = models.LongStringField()
@@ -200,9 +201,15 @@ class Questionnaire(Page):
     @staticmethod
     def get_form_fields(player): #Change
         if player.participant.control:
-            return ['ans1', 'ans2a', 'ans2b', 'ans2c', 'ans3', 'ans4']
+            if player.round_number != 3:
+                return ['ans1', 'ans2a', 'ans2b', 'ans2c', 'ans3', 'ans4']
+            else:
+                return ['ans1', 'ans2a', 'ans2b', 'ans2c', 'ans3', 'ans4', 'ans7']
         else:
-            return ['ans1', 'ans2a', 'ans2b', 'ans2c', 'ans3', 'ans4', 'ans5', 'ans6']
+            if player.round_number != 3:
+                return ['ans1', 'ans2a', 'ans2b', 'ans2c', 'ans3', 'ans4', 'ans5', 'ans6']
+            else:
+                return ['ans1', 'ans2a', 'ans2b', 'ans2c', 'ans3', 'ans4', 'ans5', 'ans6', 'ans7']
 
 
     @staticmethod
@@ -215,8 +222,19 @@ class Questionnaire(Page):
             return 'Please expand a little more for Question 3'
 
 class Game1Rules(Page):
-    pass
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 1
 
+class Game2Rules(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 2
+
+class Game3Rules(Page):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.round_number == 3
 
 class Assignment(Page):
 
@@ -256,5 +274,5 @@ class ResultsWaitPage(WaitPage):
 
 page_sequence = [Game1Introduction1, Game1Introduction2, Game1Introduction3, Game1Introduction4,
                  Game2Introduction1, Game2Introduction2, Game3Introduction1, Game3Introduction2,
-                 Game1Rules, Assignment, WaitForBoth, CentipedeGameStandard,
+                 Game1Rules, Game2Rules, Game3Rules,Assignment, WaitForBoth, CentipedeGameStandard,
                  CentipedeGameLinear, CentipedeGameConstant, Questionnaire, ResultsWaitPage]

@@ -1,5 +1,5 @@
 {{ block title }}
-    Game 1
+    Game {{ player.round_number }}
 {{ endblock }}
 {{ block content }}
 
@@ -27,7 +27,7 @@
 <p> Your will go second. </p>
 {{ endif }}
 
-<p>Click “ready” when you are ready to begin. Game 1 will begin once both participants click
+<p>Click “ready” when you are ready to begin. Game {{ player.round_number }} will begin once both participants click
 “ready.”</p>
 
 
