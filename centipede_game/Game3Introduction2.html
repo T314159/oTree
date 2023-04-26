@@ -33,6 +33,18 @@
                 the payments for different combinations of choices are shown in the figure below. Understanding
                 the new payments is crucial. So please take a few minutes to look over the following figure. </p>
                 {{ endif }}
+                {{ if player.participant.game3 == 'standard' }}
+                <p>A <b> key difference </b> with Game 3 is that the combined payment to RED and BLUE is increasing,
+                but in an exponential fashion, meaning it is <b>doubled each turn</b>. The game flow and
+                the payments for different combinations of choices are shown in the figure below. Understanding
+                the new payments is crucial. So please take a few minutes to look over the following figure. </p>
+                {{ endif }}
+                {{ if player.participant.game3 == 'constant' }}
+                <p>A <b> key difference </b> with Game 3 is that the combined payment to RED and BLUE is constant throughout,
+                the game, meaning it <b>stays the same</b>. The game flow and
+                the payments for different combinations of choices are shown in the figure below. Understanding
+                the new payments is crucial. So please take a few minutes to look over the following figure. </p>
+                {{ endif }}
 
             </td>
             <td style="padding-left: 2%">

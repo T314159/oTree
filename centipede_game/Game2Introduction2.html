@@ -27,12 +27,40 @@
     <table style="margin-top: 4%">
         <tr>
             <td style="width: 40%">
-                {{ if player.participant.game2 == 'constant' and player.participant.game1 == 'standard' }}
+                {{ if player.participant.game2 == 'constant'}}
                 <p> <b>A key difference</b> for Game 2 versus Game 1 is that the combined payment to RED and BLUE is no
                 longer increasing, but rather <b>staying constant</b>. The game flow and the payments for different
                 combinations of choices are shown in the figure below. Understanding the new payments is crucial,
                 so please take a few minutes to look over the following figure. </p>
                 {{ endif }}
+
+                {{ if player.participant.game2 == 'linear' and player.participant.game1 == 'constant'}}
+                <p> <b>A key difference</b> for Game 2 versus Game 1 is that the combined payment to RED and BLUE is no
+                no longer staying constant, but rather <b>increasing linearly (by the same amount each turn) </b>. The game flow and the payments for different
+                combinations of choices are shown in the figure below. Understanding the new payments is crucial,
+                so please take a few minutes to look over the following figure. </p>
+                {{ endif }}
+                {{ if player.participant.game2 == 'linear' and player.participant.game1 == 'standard'}}
+                <p> <b>A key difference</b> for Game 2 versus Game 1 is that the combined payment to RED and BLUE is no
+                longer increasing exponentially (doubling each time), but rather <b>increasing linearly (by the same
+                amount each turn).</b> The game flow and the payments for different
+                combinations of choices are shown in the figure below. Understanding the new payments is crucial,
+                so please take a few minutes to look over the following figure. </p>
+                {{ endif }}
+
+                {{ if player.participant.game2 == 'standard' and player.participant.game1 == 'constant'}}
+                <p> <b>A key difference</b> for Game 2 versus Game 1 is that the combined payment to RED and BLUE is no
+                no longer staying constant, but rather <b>increasing exponentially (doubling each time)</b>. The game
+                flow and the payments for different combinations of choices are shown in the figure below.
+                Understanding the new payments is crucial, so please take a few minutes to look over the following figure. </p>
+                {{ endif }}
+                {{ if player.participant.game2 == 'standard' and player.participant.game1 == 'linear'}}
+                <p> <b>A key difference</b> for Game 2 versus Game 1 is that the combined payment to RED and BLUE is no
+                longer increasing linearly (by the same amount each turn), but rather <b>increasing exponentially (doubling each time)</b>. The game flow and the payments for different
+                combinations of choices are shown in the figure below. Understanding the new payments is crucial,
+                so please take a few minutes to look over the following figure. </p>
+                {{ endif }}
+
             </td>
             <td style="padding-left: 2%">
                 {{ if player.participant.game2 == 'standard' }}
