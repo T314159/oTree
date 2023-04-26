@@ -231,10 +231,10 @@ class Questionnaire(Page):
     def error_message(player, values):
         if len(values['ans1']) < 60:
             return 'Please expand a little more for Question 1'
-        if len(values['ans3']) < 50:
+        if len(values['ans3']) < 40:
             return 'Please expand a little more for Question 3'
         if not player.participant.control:
-            if len(values['ans6']) < 50:
+            if len(values['ans6']) < 40:
                 return 'Please expand a little more for Question 6'
 
 class Game1Rules(Page):

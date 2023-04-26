@@ -77,16 +77,20 @@
     </table>
 
 
-    <button class = 'otree-btn-next btn btn-primary' id='next'>
+    <div style="float: right">
+        <button class = 'otree-btn-next btn btn-primary' id='next'>
         Next
-    </button>
-
+        </button>
+        <br> <br>
+        <p id="warning_text" style="font-size:14px"> (Button will enable once you have had time to review the figure.) </p>
+    </div>
 
     <script>
         document.getElementById("next").disabled = true;
         setTimeout(() => {
           document.getElementById("next").disabled = false;
-        }, "10000");
+          document.getElementById("warning_text").style.visibility = 'hidden';
+        }, "20000");
     </script>
 
 

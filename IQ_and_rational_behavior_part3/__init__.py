@@ -72,7 +72,7 @@ class Results(Page):
         part1_correct = 0
         selected = random.choices([0, 1], k=2) #ToDo: same as q length , 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
         for question_index in selected:
-            if player.participant.ravens_results[question_index] == 1:
+            if player.participant.raven_results[question_index] == 1:
                 part1_earned += 100
                 part1_correct += 1
         part1_text = '{}LD = ${:.2f}'.format(part1_earned, part1_earned / 100.0)

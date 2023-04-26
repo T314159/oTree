@@ -4,8 +4,26 @@
 {{ block content }}
 
     <head>
+
     <style>
     h2 {text-align: center;}
+    .otree-title {
+        background: #EEF5FF;
+        font-size: 40px;
+        text-align: center;
+        padding: 5% 0% 2% 0%;
+    }
+    .otree-body {
+        max-width:1600px
+    }
+    .otree-btn-next {
+        float: right;
+        margin-right: 1%;
+    }
+    p {
+        font-size: 20px;
+    }
+
     datalist {
       display: flex;
       justify-content: space-between;
@@ -66,7 +84,7 @@
 
     <br>
 
-    {{ formfield 'ans3' label="3. What decision-making process did you expect the other participant to follow, and did they play like you expected them to? (1-3 sentences - 50 character min)" }}
+    {{ formfield 'ans3' label="3. What decision-making process did you expect the other participant to follow, and did they play like you expected them to? (1-3 sentences - 40 character min)" }}
     <br>
 
     <input type='hidden' name='ans4' id='ans4' value=5 />

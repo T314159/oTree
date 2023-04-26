@@ -66,7 +66,7 @@
             </td>
             <td>
                 <p id="time-tag">Time Remaining</p>
-                <span id="time-left"> 30 </span>
+                <span id="time-left"> 15 </span>
             </td>
         </tr>
         <tr>
@@ -75,8 +75,8 @@
                     Continue
                 </button>
 
-                <button class = 'otree-btn-next btn btn-primary' id='stop' type='button' onclick='func_stop()' style="display: none">
-                    Stop
+                <button class = 'otree-btn-next btn btn-primary' id='end' type='button' onclick='func_end()' style="float: left; display: none">
+                    End
                 </button>
             </td>
         </tr>
@@ -92,7 +92,7 @@
 
 {{ block script }}
 <script>
-var expires = new Date().getTime() + 30500;
+var expires = new Date().getTime() + 15500;
 setInterval(function () {
     let now = new Date().getTime();
     let distance = Math.floor((expires - now)/1000);
@@ -109,7 +109,7 @@ function func_continue(){
     update();
 }
 
-function func_stop(){
+function func_end(){
     let now = new Date().getTime();
     let distance = Math.floor((expires - now)/1000);
 
@@ -158,17 +158,17 @@ function update(){
         break;
     }
     if( (turn%2) == (js_vars.my_id%2) ){
-        expires = new Date().getTime() + 30500;
+        expires = new Date().getTime() + 15500;
         document.getElementById('time-tag').innerText = "Time Remaining";
         document.getElementById('time-left').style.display = 'block';
         document.getElementById('continue').style.display = 'block';
-        document.getElementById('stop').style.display = 'block';
+        document.getElementById('end').style.display = 'block';
     }
     else{
-        document.getElementById('time-tag').innerText = "Please wait for the other player to complete their turn. (The computer will wait the full 30 seconds on their turn regardless of how long they take to make their decision.)";
+        document.getElementById('time-tag').innerText = "Please wait for the other player to complete their turn. (The computer will wait the full 15 seconds on their turn regardless of how long they take to make their decision.)";
         document.getElementById('time-left').style.display = 'none';
         document.getElementById('continue').style.display = 'none';
-        document.getElementById('stop').style.display = 'none';
+        document.getElementById('end').style.display = 'none';
     }
 }
 

@@ -30,7 +30,7 @@
                 <p>This alternation can happen up to a maximum of 6 turns, after which, the game is forced to end.
                 The full tree of choices and end payments are shown in the figure below. Please note that both
                 participants see and interact with this full tree of choices. Understanding how the game works is
-                crucial, so please take a few minutes to look over the following figure now although it will also
+                crucial, so please take a minute to look over the following figure now although it will also
                 be shown to you during the game.</p>
             </td>
             <td style="padding-left: 2%">
@@ -47,17 +47,20 @@
         </tr>
     </table>
 
-
-    <button class = 'otree-btn-next btn btn-primary' id='next'>
+    <div style="float: right">
+        <button class = 'otree-btn-next btn btn-primary' id='next'>
         Next
-    </button>
-
+        </button>
+        <br> <br>
+        <p id="warning_text" style="font-size:14px"> (Button will enable once you have had time to review the figure.) </p>
+    </div>
 
     <script>
         document.getElementById("next").disabled = true;
         setTimeout(() => {
           document.getElementById("next").disabled = false;
-        }, "10000");
+          document.getElementById("warning_text").style.visibility = 'hidden';
+        }, "20000");
     </script>
 
 
