@@ -70,6 +70,12 @@ class Game1Introduction1(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 1
+
+    def before_next_page(player: Player, timeout_happened):
+        if player.round_number == 1:
+            player.participant.game_payoffs = [0, 0, 0]
+            player.participant.game_ends = [0, 0, 0]
+
 class Game1Introduction2(Page):
     @staticmethod
     def is_displayed(player: Player):
@@ -138,8 +144,8 @@ class CentipedeGameStandard(Page):
         elif player.round_number == 3: payoff = C.payoffs[player.participant.game3]
 
         player.payoff = payoff[player.group.end_turn-1][player.id_in_group-1]
-        player.participant.game_payoffs[player.round_number] = player.payoff
-        player.participant.game_ends[player.round_number] = player.group.end_turn
+        player.participant.game_payoffs[player.round_number-1] = player.payoff
+        player.participant.game_ends[player.round_number-1] = player.group.end_turn
 
         player.participant.control = False
 
@@ -168,8 +174,8 @@ class CentipedeGameLinear(Page):
         elif player.round_number == 3: payoff = C.payoffs[player.participant.game3]
 
         player.payoff = payoff[player.group.end_turn-1][player.id_in_group-1]
-        player.participant.game_payoffs[player.round_number] = player.payoff
-        player.participant.game_ends[player.round_number] = player.group.end_turn
+        player.participant.game_payoffs[player.round_number-1] = player.payoff
+        player.participant.game_ends[player.round_number-1] = player.group.end_turn
 
         player.participant.control = False
 
@@ -198,8 +204,8 @@ class CentipedeGameConstant(Page):
         elif player.round_number == 3: payoff = C.payoffs[player.participant.game3]
 
         player.payoff = payoff[player.group.end_turn-1][player.id_in_group-1]
-        player.participant.game_payoffs[player.round_number] = player.payoff
-        player.participant.game_ends[player.round_number] = player.group.end_turn
+        player.participant.game_payoffs[player.round_number-1] = player.payoff
+        player.participant.game_ends[player.round_number-1] = player.group.end_turn
 
         player.participant.control = False
 

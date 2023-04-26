@@ -81,8 +81,8 @@ class Results(Page):
 
         # Part 2
         part2_selected = random.randint(1,3)
-        part2_earned = player.participant.game_payoffs[part2_selected]
-        part2_turn = player.participant.game_ends[part2_selected]
+        part2_earned = player.participant.game_payoffs[part2_selected-1]
+        part2_turn = player.participant.game_ends[part2_selected-1]
         part2_text = '{}LD = ${:.2f}'.format(part2_earned, part2_earned / 100.0)
 
         part3_selected = random.choice(["Lottery", "Allocation", "Reasoning"])
@@ -101,9 +101,9 @@ class Results(Page):
         else:
             if player.BI_choice == 1:
                 part3_earned = 100
-                part3_extra = "Correct"
+                part3_extra = "Answer was correct"
             else:
-                part3_extra = "Incorrect"
+                part3_extra = "Answer was incorrect"
 
         part3_text = '{}LD = ${:.2f}'.format(part3_earned, part3_earned / 100.0)
 
