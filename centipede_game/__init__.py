@@ -229,12 +229,13 @@ class Questionnaire(Page):
 
     @staticmethod
     def error_message(player, values):
-        if values['ans2a'] + values['ans2b'] + values['ans2c'] != 100:
-            return 'The sum of the percentages in Question 2 must add up to 100%'
         if len(values['ans1']) < 60:
             return 'Please expand a little more for Question 1'
         if len(values['ans3']) < 50:
             return 'Please expand a little more for Question 3'
+        if not player.participant.control:
+            if len(values['ans6']) < 50:
+                return 'Please expand a little more for Question 6'
 
 class Game1Rules(Page):
     @staticmethod

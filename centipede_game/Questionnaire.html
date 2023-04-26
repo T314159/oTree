@@ -28,7 +28,7 @@
 
     <h2>Review Questionnaire </h2>
 
-    {{ formfield 'ans1' label="1. Please describe the decision-making process you used in Game 3? (2-4 sentences)" }}
+    {{ formfield 'ans1' label="1. Please describe the decision-making process you used in Game 3? (2-4 sentences - 60 character min)" }}
 
     <br>
     <p> 2. Please answer the following questions by pointing the slider to the point that best reflects
@@ -66,7 +66,7 @@
 
     <br>
 
-    {{ formfield 'ans3' label="3. What decision-making process did you expect the other participant to follow, and did they play like you expected them to? (1-3 sentences)" }}
+    {{ formfield 'ans3' label="3. What decision-making process did you expect the other participant to follow, and did they play like you expected them to? (1-3 sentences - 50 character min)" }}
     <br>
 
     <input type='hidden' name='ans4' id='ans4' value=5 />
@@ -110,7 +110,7 @@
         </datalist>
         {{ formfield_errors 'ans5' }}
 
-        {{ formfield 'ans6' label="6. Why or why not? (1-3 sentences)" }}
+        {{ formfield 'ans6' label="6. Why or why not? (1-3 sentences) - 40 character min" }}
 
 
         <script>
@@ -155,33 +155,17 @@
             let value = parseInt(input.value) + "%";
             document.getElementById('ans2a').value = parseInt(input.value);
             document.getElementById('ans2a_visible_label').innerHTML = value;
-            updateQ2total();
         }
         function updateQ2b(input) {
             let value = parseInt(input.value) + "%";
             document.getElementById('ans2b').value = parseInt(input.value);
             document.getElementById('ans2b_visible_label').innerHTML = value;
-            updateQ2total();
         }
         function updateQ2c(input) {
             let value = parseInt(input.value) + "%";
             document.getElementById('ans2c').value = parseInt(input.value);
             document.getElementById('ans2c_visible_label').innerHTML = value;
-            updateQ2total();
         }
-        function updateQ2total() {
-            let total = parseInt(document.getElementById('ans2a').value) + parseInt(document.getElementById('ans2b').value) + parseInt(document.getElementById('ans2c').value);
-            document.getElementById('ans2total').innerHTML = parseInt(total) + "%";
-            if(total!=100){
-                document.getElementById('ans2total').style.color="red";
-                document.getElementById('warning_text').style.color="red";
-            }
-            else {
-                document.getElementById('ans2total').style.color="green";
-                document.getElementById('warning_text').style.color="green";
-            }
-        }
-
         function updateQ4(input) {
             let value = parseInt(input.value);
             document.getElementById('ans4').value = value;

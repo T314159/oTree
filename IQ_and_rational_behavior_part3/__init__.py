@@ -67,12 +67,10 @@ class ResultsWaitPage(WaitPage):
 class Results(Page):
     def vars_for_template(player: Player):
         import random
-        part1_earned = 0
-        part2_earned = 0
-        part3_earned = 0
 
+        part1_earned = 0
         part1_correct = 0
-        selected = random.choices([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], k=2)
+        selected = random.choices([0, 1], k=2) #ToDo: same as q length , 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
         for question_index in selected:
             if player.participant.ravens_results[question_index] == 1:
                 part1_earned += 100
@@ -85,11 +83,13 @@ class Results(Page):
         part2_turn = player.participant.game_ends[part2_selected-1]
         part2_text = '{}LD = ${:.2f}'.format(part2_earned, part2_earned / 100.0)
 
+
+        part3_earned = 0
         part3_selected = random.choice(["Lottery", "Allocation", "Reasoning"])
         if selected == "Lottery":
             lottery_result = random.randint(1,2)
             payoff_matrix = [[140,140], [120,180], [100,220], [80,260], [60,300], [10, 350]]
-            part3_earned += payoff_matrix[player.lottery_choice-1][lottery_result-1]
+            part3_earned += payoff_matrix[player.lottery_choice-1][lttery_result-1]
             if lottery_result == 1: part3_extra = "Lottery result was A"
             else: part3_extra = "Lottery result was B"
 
