@@ -26,7 +26,7 @@ SESSION_CONFIGS = [
     dict(
         name='IQ_and_rational_behavior',
         display_name="IQ and Rational Behavior",
-        app_sequence=['IQ_and_rational_behavior_part1', 'ravens_test', 'IQ_and_rational_behavior_part2', 'centipede_game', 'payment_info'],
+        app_sequence=['IQ_and_rational_behavior_part1', 'ravens_test', 'IQ_and_rational_behavior_part2', 'centipede_game', 'IQ_and_rational_behavior_part3', 'payment_info'],
         num_demo_participants=2
     ),
     dict(

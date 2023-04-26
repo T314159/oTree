@@ -32,10 +32,11 @@ th {
 <p> You earned: </p>
 
 <table class='center'>
-  <tr>  <td> Show up fee </td> <td> 140 </td>  </tr>
-  <tr>  <td> Part 1 Bonus (__ questions correct) </td> <td> 180 </td>  </tr>
-  <tr>  <td> Part 2 (Game __ chosen randomly, ended turn __) </td> <td> 100 </td> </tr>
-  <tr>  <td> Part 3 (__ Choice Selected randomly, ) </td> <td> 80 </td> </tr>
+  <tr>  <td> Show up fee </td> <td> $5.00 </td>  </tr>
+  <tr>  <td> Part 1 Bonus ( {{ part1_correct }} questions correct) </td> <td> {{ part1_text }} </td>  </tr>
+  <tr>  <td> Part 2 (Game {{ part2_selected }} chosen randomly, ended turn {{ part2_turn }} ) </td> <td> {{ part2_text }} </td> </tr>
+  <tr>  <td> Part 3 ({{ part3_selected }} Choice Selected randomly, {{ part3_extra }}) </td> <td> {{ part3_text }} </td> </tr>
+  <tr>  <td> <b>Total</b> </td> <td> <b> {{ total_text }} </b> </td> </tr>
 </table>
 
     {{ next_button }}
