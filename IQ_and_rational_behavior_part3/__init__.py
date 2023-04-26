@@ -79,9 +79,10 @@ class Results(Page):
                 part1_correct += 1
         part1_text = '{}LD = ${:.2f}'.format(part1_earned, part1_earned / 100.0)
 
+        # Part 2
         part2_selected = random.randint(1,3)
-        # Get info from past.
-        part2_turn = 1 #TODO
+        part2_earned = player.participant.game_payoffs[part2_selected]
+        part2_turn = player.participant.game_ends[part2_selected]
         part2_text = '{}LD = ${:.2f}'.format(part2_earned, part2_earned / 100.0)
 
         part3_selected = random.choice(["Lottery", "Allocation", "Reasoning"])
@@ -89,17 +90,23 @@ class Results(Page):
             lottery_result = random.randint(1,2)
             payoff_matrix = [[140,140], [120,180], [100,220], [80,260], [60,300], [10, 350]]
             part3_earned += payoff_matrix[player.lottery_choice-1][lottery_result-1]
+            if lottery_result == 1: part3_extra = "Lottery result was A"
+            else: part3_extra = "Lottery result was B"
+
         elif selected == "Allocation":
             pass
             part3_earned += 100-player.participant.dictator_choice
             part3_earned += player.participant.dictator_from_others
-
+            part3_extra = f"{player.participant.dictator_from_others} given to you by another player"
         else:
             if player.BI_choice == 1:
                 part3_earned = 100
+                part3_extra = "Correct"
+            else:
+                part3_extra = "Incorrect"
 
         part3_text = '{}LD = ${:.2f}'.format(part3_earned, part3_earned / 100.0)
-        part3_extra = "" #TODO
+
 
         total_text = '${:.2f}'.format((500+part1_earned+part2_earned+part3_earned) / 100.0)
 
