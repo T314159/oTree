@@ -96,8 +96,21 @@ var expires = new Date().getTime() + 15500;
 setInterval(function () {
     let now = new Date().getTime();
     let distance = Math.floor((expires - now)/1000);
-    document.getElementById('time-left').innerText = distance;
+    if(distance >= 0){
+        document.getElementById('time-left').innerText = distance;
+    }
+    else {
+        document.getElementById('time-left').innerText = "Time's up! Please make a decision!";
+    }
 }, 500);
+setInterval(function () {
+    let now = new Date().getTime();
+    let distance = Math.floor((expires - now)/1000);
+    if(distance < 0 && (turn%2) == (js_vars.my_id%2) ){
+        alert("Time's up! Please make a decision!");
+    }
+}, 10000);
+
 
 var turn = 1;
 function func_continue(){
