@@ -1,0 +1,67 @@
+{{ block title }}
+    Game {{ player.round_number }}
+{{ endblock }}
+
+{{ block content }}
+
+<style>
+    .otree-title {
+        background: #EEF5FF;
+        font-size: 40px;
+        text-align: center;
+        padding: 5% 0% 2% 0%;
+    }
+    .otree-body {
+        max-width:1200px
+    }
+    .otree-btn-next {
+        float: right;
+        margin-right: 1%;
+    }
+    p {
+        font-size: 20px;
+    }
+    </style>
+
+<main id='main' style="margin: 0px">
+    <table>
+        <tr>
+            <td rowspan="2" width="80%">
+                {{ if current_game == 'standard' }}
+                    <img class="image" src="{{ static 'centipede_game/exp6.png' }}" style="width:100%;"/>
+                {{ endif }}
+                {{ if current_game == 'constant' }}
+                    <img class="image" src="{{ static 'centipede_game/con6.png' }}" style="width:100%;"/>
+                {{ endif }}
+                {{ if current_game == 'linear' }}
+                    <img class="image" src="{{ static 'centipede_game/lin6.png' }}" style="width:100%;"/>
+                {{ endif }}
+
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <p>The other player chose to END at turn {{ player.group.end_turn }} </p>
+
+                <button class = 'otree-btn-next btn btn-primary' id='next' style='visibility: visible'>
+                    Next
+                </button>
+
+            </td>
+        </tr>
+    </table>
+
+
+</main>
+
+
+
+
+
+{{ endblock }}
+
+
+
+
+

@@ -84,7 +84,8 @@
     <br>
 
     <input type='hidden' name='ans4' id='ans4' value=5 />
-    <label for="ans4">4. Did you see the other participant primarily as a teammate or an opponent? </label><br>
+    <label for="ans4">4. Did you see the other participant primarily as a teammate or an opponent?
+        (Please select your answer on the sliding scale below based on how close your view of them was to a teammate versus opponent)</label><br>
     <input type="range" id="ans4_visible" min="0" max="10" list="tickmarksQ4" oninput="updateQ4(this)"> <br>
 
     <datalist id="tickmarksQ4">
@@ -106,7 +107,8 @@
 
     {{ if not participant.control }}
         <input type='hidden' name='ans5' id='ans5' value=5 />
-        <label for="ans5">5. Did learning the IQ of the other participant effect the way you approached your strategy? </label><br>
+        <label for="ans5">5. Did learning the IQ of the other participant effect the way you approached your strategy?
+        (Please select your answer on the sliding scale below based on how much of an effect learning their IQ had on your strategy)</label><br>
         <input type="range" id="ans5_visible" min="0" max="10" list="tickmarksQ5" oninput="updateQ5(this)"> <br>
 
         <datalist id="tickmarksQ5">
@@ -120,7 +122,7 @@
           <option value=7></option>
           <option value=8></option>
           <option value=9></option>
-          <option value=10 label="Massively"></option>
+          <option value=10 label="A lot"></option>
         </datalist>
         {{ formfield_errors 'ans5' }}
 

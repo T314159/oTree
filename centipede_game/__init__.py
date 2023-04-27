@@ -210,6 +210,15 @@ class CentipedeGameConstant(Page):
         player.participant.control = False
 
 
+class OtherEnded(Page):
+    def is_displayed(player: Player):
+        return player.group.end_turn % 2 != player.id_in_group % 2
+
+    def vars_for_template(player: Player):
+        return dict(current_game=current_game(player, player.round_number))
+
+
+
 class Questionnaire(Page):
     form_model = 'player'
 
@@ -319,4 +328,4 @@ class ResultsWaitPage(WaitPage):
 page_sequence = [Game1Introduction1, Game1Introduction2, Game1Introduction3, Game1Introduction4,
                  Game2Introduction1, Game2Introduction2, Game3Introduction1, Game3Introduction2,
                  Game1Rules, Game2Rules, Game3Rules,Assignment, WaitForBoth, CentipedeGameStandard,
-                 CentipedeGameLinear, CentipedeGameConstant, Questionnaire, ResultsWaitPage]
+                 CentipedeGameLinear, CentipedeGameConstant, OtherEnded, Questionnaire, ResultsWaitPage]
