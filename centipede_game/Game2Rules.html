@@ -21,7 +21,7 @@
     <div id='questions'> </div>
 
     <div id='q1'>
-        <p> The combined payment to RED and BLUE increases each turn </p>
+        <p> {{ question }} </p>
         <input type="radio" id="q1_true" name="q1" value="True">
         <label for="q1_true">True</label><br>
         <input type="radio" id="q1_false" name="q1" value="False">
@@ -33,7 +33,7 @@
     </div>
 
     <div id='q1_error' style='display: none'>
-        <p style='color: red;'>Incorrect, the total combined payment to RED and BLUE stays the same each turn. Try Again.</p>
+        <p style='color: red;'> {{ error_prompt }} </p>
     </div>
 
     <br>

@@ -247,10 +247,38 @@ class Game2Rules(Page):
     def is_displayed(player: Player):
         return player.round_number == 2
 
+    def vars_for_template(player: Player):
+        if player.participant.game2 == "constant":
+            return dict(question="The combined payment to RED and BLUE increases each turn.",
+                        error_prompt = "Incorrect, the total combined payment to RED and BLUE stays the same each turn. Try Again.")
+        elif player.participant.game2 == "standard" and player.participant.game1 == "constant":
+            return dict(question="The combined payment to RED and BLUE stays the same each turn.",
+                        error_prompt = "Incorrect, the total combined payment to RED and BLUE doubles each turn. Try Again.")
+        elif player.participant.game2 == "standard" and player.participant.game1 == "linear":
+            return dict(question="The combined payment to RED and BLUE increases by the same amount each turn",
+                        error_prompt = "Incorrect, the total combined payment to RED and BLUE doubles each turn. Try Again.")
+        elif player.participant.game2 == "linear" and player.participant.game1 == "constant":
+            return dict(question="The combined payment to RED and BLUE stays the same each turn.",
+                        error_prompt = "Incorrect, the total combined payment increases by the same amount each turn. Try Again.")
+        else:
+            return dict(question="The combined payment to RED and BLUE doubles each turn",
+                        error_prompt = "Incorrect, the total combined payment increases by the same amount each turn. Try Again.")
+
 class Game3Rules(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 3
+
+    def vars_for_template(player: Player):
+        if player.participant.game3 == "linear":
+            return dict(question="The total combined payment increases by the same amount each turn.",
+                        error_prompt = "Incorrect, although the piles are swapped each turn, the total combined payment increases by the same amount (200LD) each turn. Try Again.")
+        elif player.participant.game3 == "standard":
+            return dict(question="The combined payment to RED and BLUE doubles each turn.",
+                        error_prompt = "Incorrect, although the piles are swapped each turn, the total combined payment doubles each turn. Try Again.")
+        else:
+            return dict(question="The combined payment to RED and BLUE stays the same each turn.",
+                        error_prompt = "Incorrect, although the piles are swapped and shifted each turn, the total combined payment remains constant. All that changes is how it is divided between the two players. Try Again.")
 
 class Assignment(Page):
 
