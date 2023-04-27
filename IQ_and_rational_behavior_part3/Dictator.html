@@ -2,6 +2,24 @@
 Allocation Choice
 {{ endblock }}
 {{ block content }}
+<style>
+    .otree-title {
+        background: #EEF5FF;
+        font-size: 40px;
+        text-align: center;
+        padding: 5% 0% 2% 0%;
+    }
+    .otree-body {
+        max-width:1600px
+    }
+    .otree-btn-next {
+        float: right;
+        margin-right: 1%;
+    }
+    p,a,span {
+        font-size: 20px;
+    }
+</style>
     <p>
   In this next scenario, you have been paired with another participant. You have been given 100LD
   to allocate between yourself and the other participant. This is an anonymous one-time
@@ -10,7 +28,8 @@ Allocation Choice
     <p>Select on the slider below how much you would like to allocate to the other participant:</p>
     <br>
     <input type='hidden' name='dictator_choice' id='dictator_choice' value=0 />
-    <input style="margin-left:5%; width:50%" type="range" id="dictator_choice_visible" min="0" max="100" value="0" class="slider" oninput="update(this)">
+    <a style="margin-left:4%">0</a>
+    <input style="margin-left:1%; margin-right:1%; width:50%" type="range" id="dictator_choice_visible" min="0" max="100" value="0" class="slider" oninput="update(this)">
     <label><span id="dictator_choice_visible_label"> Make a selection </span></label> <br>
     <br>
     {{ formfield_errors "dictator_choice" }}
@@ -25,7 +44,7 @@ Allocation Choice
             document.getElementById('dictator_choice').value = parseInt(input.value);
             document.getElementById('dictator_choice_visible_label').innerHTML = value;
             let other = 100-parseInt(input.value);
-            document.getElementById('confirmation').innerHTML = "You have selected to give " + value + " to the other participant and keep " + 100-value + " LD for yourself";
+            document.getElementById('confirmation').innerHTML = "You have selected to give <b>" + value + "</b> to the other participant and keep <b>" + other + " LD</b> for yourself";
            }
     </script>
 

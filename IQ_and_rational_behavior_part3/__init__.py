@@ -75,21 +75,21 @@ class Results(Page):
             if player.participant.raven_results[question_index] == 1:
                 part1_earned += 100
                 part1_correct += 1
-        part1_text = '{}LD = ${:.2f}'.format(part1_earned, part1_earned / 100.0)
+        part1_text = '{} LD = ${:.2f}'.format(part1_earned, part1_earned / 100.0)
 
         # Part 2
         part2_selected = random.randint(1,3)
         part2_earned = player.participant.game_payoffs[part2_selected-1]
         part2_turn = player.participant.game_ends[part2_selected-1]
-        part2_text = '{}LD = ${:.2f}'.format(part2_earned, part2_earned / 100.0)
+        part2_text = '{} LD = ${:.2f}'.format(part2_earned, part2_earned / 100.0)
 
 
         part3_earned = 0
         part3_selected = random.choice(["Lottery", "Allocation", "Reasoning"])
-        if selected == "Lottery":
+        if part3_selected == "Lottery":
             lottery_result = random.randint(1,2)
             payoff_matrix = [[140,140], [120,180], [100,220], [80,260], [60,300], [10, 350]]
-            part3_earned += payoff_matrix[player.lottery_choice-1][lttery_result-1]
+            part3_earned += payoff_matrix[player.lottery_choice-1][lottery_result-1]
             if lottery_result == 1: part3_extra = "Lottery result was A"
             else: part3_extra = "Lottery result was B"
 
@@ -105,7 +105,7 @@ class Results(Page):
             else:
                 part3_extra = "Answer was incorrect"
 
-        part3_text = '{}LD = ${:.2f}'.format(part3_earned, part3_earned / 100.0)
+        part3_text = '{} LD = ${:.2f}'.format(part3_earned, part3_earned / 100.0)
 
 
         total_text = '${:.2f}'.format((500+part1_earned+part2_earned+part3_earned) / 100.0)
