@@ -113,7 +113,7 @@ function func_end(){
     let now = new Date().getTime();
     let distance = Math.floor((expires - now)/1000);
 
-    liveSend({'choice': 'Stop', 'time-left': distance});
+    liveSend({'choice': 'End', 'time-left': distance});
     document.getElementById('end_turn').value = turn;
     form = document.getElementById('form');
     form.submit();
@@ -125,7 +125,7 @@ function liveRecv(data){
             turn += 1;
             update();
         }
-        else if (data['choice'] == 'Stop'){
+        else if (data['choice'] == 'End'){
             document.getElementById('end_turn').value = turn;
             form = document.getElementById("form");
             form.submit();

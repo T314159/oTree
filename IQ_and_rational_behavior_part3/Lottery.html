@@ -25,7 +25,7 @@ Lottery Choice
       text-align:center;
     }
 
-    tr:nth-child(even){background-color: #f2f2f2;}
+    tr:nth-child(even){background-color: #e7f1ff;}
 
     tr:hover {background-color: #ddd;}
 
@@ -33,13 +33,25 @@ Lottery Choice
       padding-top: 12px;
       padding-bottom: 12px;
       text-align: left;
-      background-color: #04AA6D;
+      background-color: #257dfd;
       color: white;
       text-align:center;
     }
     .center {
       margin-left: auto;
       margin-right: auto;
+    }
+    .form-check {
+        display: inline-flex;
+        display: inline-flex;
+        padding-right: 5%;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        font-size: 20px;
+    }
+    .col-form-label {
+        font-size: 20px;
     }
     </style>
     <p>
@@ -68,7 +80,9 @@ Lottery Choice
     </div>
 
     <div style="float:left; width:35%; margin-left:5%; margin-top:2%;">
-
+        <br>
+        <br>
+        <br>
         {{ formfield 'lottery_choice' label="Which lottery would you like to enter?" }}
         <br>
         {{ next_button }}
