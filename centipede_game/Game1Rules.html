@@ -3,6 +3,22 @@
 {{ endblock }}
 {{ block content }}
     <style>
+    .otree-title {
+        background: #EEF5FF;
+        font-size: 40px;
+        text-align: center;
+        padding: 5% 0% 2% 0%;
+    }
+    .otree-body {
+        max-width:1200px
+    }
+    .otree-btn-next {
+        float: right;
+        margin-right: 1%;
+    }
+    p, label, inline {
+        font-size: 20px;
+    }
     .form-inline {
       display: flex;
       flex-flow: row wrap;
@@ -167,7 +183,7 @@
         <input type='hidden' name='part1_intro_q4' id='part1_intro_q6' />
         <input type='hidden' name='part1_intro_q4' id='part1_intro_q7' />
 
-        <button class = 'otree-btn-next btn btn-primary' id='next' style='visibility: visible'>
+        <button class = 'otree-btn-next btn btn-primary' id='next' style='visibility: hidden'>
             Next
         </button>
 
@@ -245,7 +261,7 @@
 
               case 5:
                 document.getElementById('q4_correct').style.display = 'none'
-                if (document.getElementById('q5a_ans').value == "160" && document.getElementById('q5b_ans').value == "40") {
+                if (document.getElementById('q5a_ans').value == js_vars.q5_ans_red && document.getElementById('q5b_ans').value == js_vars.q5_ans_blue) {
                     state = 6;
                     document.getElementById('q5_correct').style.display = 'block'
                     document.getElementById('q6').style.display = 'block'
@@ -272,8 +288,8 @@
                 break;
 
               case 7:
-                document.getElementById('q5_correct').style.display = 'none'
-                if (document.getElementById('q7a_ans').value == "1280" && document.getElementById('q7b_ans').value == "640") {
+                document.getElementById('q6_correct').style.display = 'none'
+                if (document.getElementById('q7a_ans').value == js_vars.q7_ans_continue && document.getElementById('q7b_ans').value == js_vars.q7_ans_end) {
                     state = 8;
                     document.getElementById('q7_correct').style.display = 'block'
                     document.getElementById('next').style.visibility = 'visible'

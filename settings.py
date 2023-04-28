@@ -24,10 +24,17 @@ SESSION_CONFIGS = [
         num_demo_participants=2
     ),
     dict(
-        name='IQ_and_rational_behavior',
-        display_name="IQ and Rational Behavior",
-        app_sequence=['IQ_and_rational_behavior_part1', 'ravens_test', 'IQ_and_rational_behavior_part2', 'centipede_game', 'IQ_and_rational_behavior_part3', 'payment_info'],
+        name='IQ_and_rational_behavior_small',
+        display_name="IQ and Rational Behavior (4 players)",
+        app_sequence=['IQ_and_rational_behavior_part1', 'ravens_test', 'IQ_and_rational_behavior_part2',
+                      'centipede_game', 'IQ_and_rational_behavior_part3', 'payment_info'],
         num_demo_participants=4
+    ),
+    dict(
+        name='IQ_and_rational_behavior_larger',
+        display_name="IQ and Rational Behavior (8 players)",
+        app_sequence=['IQ_and_rational_behavior_part1', 'ravens_test', 'IQ_and_rational_behavior_part2', 'centipede_game', 'IQ_and_rational_behavior_part3', 'payment_info'],
+        num_demo_participants=8
     ),
     dict(
         name='IQ_and_rational_behavior_3',

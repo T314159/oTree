@@ -7,7 +7,7 @@ Your app description
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'centipede_game'
+    NAME_IN_URL = 'games'
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 3
 
@@ -62,7 +62,6 @@ def creating_session(subsession: Subsession):
             matrix.append(next)
             i += 4
         subsession.set_group_matrix(matrix)
-    print(subsession.get_group_matrix())
 
 
 class Group(BaseGroup):
@@ -272,8 +271,9 @@ class Game1Rules(Page):
         return dict(q4_ans = C.payoffs[current_game(player, player.round_number)][1][1],
                     q5_ans_red = C.payoffs[current_game(player, player.round_number)][2][0],
                     q5_ans_blue = C.payoffs[current_game(player, player.round_number)][2][1],
-                    q7_ans_end = C.payoffs[current_game(player, player.round_number)][5][1],
-                    q7_ans_continue = C.payoffs[current_game(player, player.round_number)][6][1])
+                    q7_ans_continue = C.payoffs[current_game(player, player.round_number)][6][1],
+                    q7_ans_end=C.payoffs[current_game(player, player.round_number)][5][1])
+
 
 class Game2Rules(Page):
     @staticmethod

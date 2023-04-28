@@ -7,7 +7,7 @@ Your app description
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'IQ_and_rational_behavior_part2'
+    NAME_IN_URL = 'part2'
     PLAYERS_PER_GROUP = 2
     NUM_ROUNDS = 1
 

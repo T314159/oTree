@@ -3,6 +3,22 @@
 {{ endblock }}
 {{ block content }}
     <style>
+    .otree-title {
+        background: #EEF5FF;
+        font-size: 40px;
+        text-align: center;
+        padding: 5% 0% 2% 0%;
+    }
+    .otree-body {
+        max-width:1200px
+    }
+    .otree-btn-next {
+        float: right;
+        margin-right: 1%;
+    }
+    p, label, inline {
+        font-size: 20px;
+    }
     .form-inline {
       display: flex;
       flex-flow: row wrap;
@@ -16,7 +32,7 @@
     select their choice, the computer will wait the full 15 seconds before either continuing to your
     turn or ending the game.</p>
 
-    <p> Please answer a quiz question about Game 2: </p>
+    <p> Please answer a quiz question about Game 3: </p>
 
     <div id='questions'> </div>
 
@@ -43,7 +59,7 @@
 
     <input type='hidden' name='part1_intro_q1' id='part1_intro_q1' />
 
-    <button class = 'otree-btn-next btn btn-primary' id='next' style='visibility: visible'>
+    <button class = 'otree-btn-next btn btn-primary' id='next' style='visibility: hidden'>
         Next
     </button>
 
