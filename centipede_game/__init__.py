@@ -22,31 +22,47 @@ class Subsession(BaseSubsession):
     variant = models.StringField()
 
 def creating_session(subsession: Subsession):
-      matrix = subsession.get_group_matrix()
+    matrix = []
 
-      if subsession.round_number == 1:
-         matrix = [[1, 3], [2, 4], [5, 6]]
-         #subsession.set_group_matrix(matrix)
-      elif subsession.round_number == 2:
-          matrix = [[3,2],[1,4],[6,5]]
-          #subsession.set_group_matrix(matrix)
-#         matrix = [ [C.matrix[0][0], C.matrix[1][1]],
-#                    [C.matrix[1][0], C.matrix[2][1]],
-#                    [C.matrix[2][0], C.matrix[0][1]],
-#                    [C.matrix[3][0], C.matrix[4][1]],
-#                    [C.matrix[4][0], C.matrix[5][1]],
-#                    [C.matrix[5][0], C.matrix[3][1]] ]
-#         subsession.set_group_matrix(matrix)
-#     elif subsession.round_number == 3:
-#         matrix = [ [C.matrix[0][0], C.matrix[2][1]],
-#                    [C.matrix[1][0], C.matrix[0][1]],
-#                    [C.matrix[2][0], C.matrix[1][1]],
-#                    [C.matrix[3][0], C.matrix[5][1]],
-#                    [C.matrix[4][0], C.matrix[3][1]],
-#                    [C.matrix[5][0], C.matrix[4][1]] ]
-#         subsession.set_group_matrix(matrix)
-#
-#     print(subsession.get_group_matrix())
+    if subsession.round_number == 1:
+        import random
+        i = 0
+        while i < len(subsession.get_players()):
+            next = [i+1, i + 2]
+            random.shuffle(next)
+            matrix.append(next)
+            next = [i + 3, i + 4]
+            random.shuffle(next)
+            matrix.append(next)
+            i += 4
+        subsession.set_group_matrix(matrix)
+
+    elif subsession.round_number == 2:
+        import random
+        i = 0
+        while i < len(subsession.get_players()):
+            next = [i+1, i + 3]
+            random.shuffle(next)
+            matrix.append(next)
+            next = [i+2, i+4]
+            random.shuffle(next)
+            matrix.append(next)
+            i += 4
+        subsession.set_group_matrix(matrix)
+
+    elif subsession.round_number == 3:
+        import random
+        i = 0
+        while i < len(subsession.get_players()):
+            next = [i+1, i + 4]
+            random.shuffle(next)
+            matrix.append(next)
+            next = [i+2, i+3]
+            random.shuffle(next)
+            matrix.append(next)
+            i += 4
+        subsession.set_group_matrix(matrix)
+    print(subsession.get_group_matrix())
 
 
 class Group(BaseGroup):
@@ -250,6 +266,14 @@ class Game1Rules(Page):
     @staticmethod
     def is_displayed(player: Player):
         return player.round_number == 1
+
+    @staticmethod
+    def js_vars(player: Player):
+        return dict(q4_ans = C.payoffs[current_game(player, player.round_number)][1][1],
+                    q5_ans_red = C.payoffs[current_game(player, player.round_number)][2][0],
+                    q5_ans_blue = C.payoffs[current_game(player, player.round_number)][2][1],
+                    q7_ans_end = C.payoffs[current_game(player, player.round_number)][5][1],
+                    q7_ans_continue = C.payoffs[current_game(player, player.round_number)][6][1])
 
 class Game2Rules(Page):
     @staticmethod

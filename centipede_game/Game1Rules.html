@@ -10,151 +10,172 @@
     }
     </style>
 
-    <p> You will have 15 seconds to make a decision on your turn, with a timer appearing in the upper
-    right corner of the display. You must select an option in this time frame. The other participant
-    will also have 15 seconds to make their decision. Regardless of how long they take to select their
-    choice, the computer will wait the full 15 seconds before either continuing to your turn or ending
-    the game.</p>
+    <div style="width: 47%; float: left">
+        <p> You will have 15 seconds to make a decision on your turn, with a timer appearing in the upper
+        right corner of the display. You must select an option in this time frame. The other participant
+        will also have 15 seconds to make their decision. Regardless of how long they take to select their
+        choice, the computer will wait the full 15 seconds before either continuing to your turn or ending
+        the game.</p>
 
-    <p> Please answer some quiz questions about Game 1: </p>
+        {{ if player.participant.game1 == 'standard' }}
+            <img class="image" src="{{ static 'centipede_game/exp6.png' }}" style="width:100%;"/>
+        {{ endif }}
+        {{ if player.participant.game1 == 'constant' }}
+            <img class="image" src="{{ static 'centipede_game/con6.png' }}" style="width:100%;"/>
+        {{ endif }}
+        {{ if player.participant.game1 == 'linear' }}
+            <img class="image" src="{{ static 'centipede_game/lin6.png' }}" style="width:100%;"/>
+        {{ endif }}
 
-    <div id='questions'> </div>
-
-    <div id='q1'>
-        <p> 1. There are 2 choices on each turn </p>
-        <input type="radio" id="q1_true" name="q1" value="True">
-        <label for="q1_true">True</label><br>
-        <input type="radio" id="q1_false" name="q1" value="False">
-        <label for="q1_false">False</label><br><br>
     </div>
 
-    <div id='q1_correct' style='display: none'>
-        <p style='color: green;'>Correct </p>
+    <div style="width: 47%; float: left; margin-left:4%">
+
+        <p> Please answer some quiz questions about Game 1: </p>
+
+        <div id='questions'> </div>
+
+        <div id='q1'>
+            <p> 1. There are 2 choices on each turn </p>
+            <input type="radio" id="q1_true" name="q1" value="True">
+            <label for="q1_true">True</label><br>
+            <input type="radio" id="q1_false" name="q1" value="False">
+            <label for="q1_false">False</label><br><br>
+        </div>
+
+        <div id='q1_correct' style='display: none'>
+            <p style='color: green;'>Correct </p>
+        </div>
+
+        <div id='q1_error' style='display: none'>
+            <p style='color: red;'>Incorrect, this statement is True. Each turn there are 2 choices: CONTINUE or END. Try Again.</p>
+        </div>
+
+
+        <div id='q2' style='display: none'>
+            <p> 2. Participants are randomly paired to each other</p>
+            <input type="radio" id="q2_true" name="q2" value="True">
+            <label for="q2_true">True</label><br>
+            <input type="radio" id="q2_false" name="q2" value="False">
+            <label for="q2_false">False</label><br><br>
+        </div>
+
+        <div id='q2_correct' style='display: none'>
+            <p style='color: green;'>Correct </p>
+        </div>
+
+        <div id='q2_error' style='display: none'>
+            <p style='color: red;'>Incorrect, you will indeed be randomly assigned to a new person each round. Try again. </p>
+        </div>
+
+
+        <div id='q3' style='display: none'>
+            <p> 3. BLUE goes first</p>
+            <input type="radio" id="q3_true" name="q3" value="True">
+            <label for="q2_true">True</label><br>
+            <input type="radio" id="q3_false" name="q3" value="False">
+            <label for="q2_false">False</label><br><br>
+        </div>
+
+        <div id='q3_correct' style='display: none'>
+            <p style='color: green;'>Correct </p>
+        </div>
+
+        <div id='q3_error' style='display: none'>
+            <p style='color: red;'>Incorrect, if you look at the tree, we see that turn 1 is RED. Try again. </p>
+        </div>
+
+
+        <div id='q4' class='form-inline' style='display: none'>
+            <label for="q4_ans">4. If RED selects CONTINUE and then BLUE selects END, BLUE will receive </label>
+            <input style="width:10%;" type="text" id="q4_ans"/>
+            <inline> LD</inline>
+        </div>
+
+        <div id='q4_correct' style='display: none'>
+            <p style='color: green;'>Correct </p>
+        </div>
+
+        <div id='q4_error' style='display: none'>
+            <p style='color: red;'>Incorrect. Follow the path on the decision tree above carefully. If RED continues to turn 2 and
+                then BLUE ends, what position do they end at? What is BLUE's payoff in this position? Try again. </p>
+        </div>
+
+
+        <div id='q5' class='form-inline' style='display: none'>
+            <label for="q5a_ans">5. If both players select CONTINUE until turn 3, when RED selects END, RED will
+            receive </label>
+            <input style="width:10%;" type="text" id="q5a_ans"/>
+            <inline> LD and BLUE will receive </inline>
+            <input style="width:10%;" type="text" id="q5b_ans"/>
+            <inline> LD </inline>
+        </div>
+
+        <div id='q5_correct' style='display: none'>
+            <p style='color: green;'>Correct </p>
+        </div>
+
+        <div id='q5_error' style='display: none'>
+            <p style='color: red;'>Incorrect. Follow the path on the decision tree above carefully. If both continue to turn 3 and
+                then RED ends, what position do they end at? What are each of their payoffs in this position. Try again. </p>
+        </div>
+
+
+        <div id='q6' style='display: none'>
+            <p> 6. The game will end after the 6th round regardless of what BLUE chooses </p>
+            <input type="radio" id="q6_true" name="q6" value="True">
+            <label for="q6_true">True</label><br>
+            <input type="radio" id="q6_false" name="q6" value="False">
+            <label for="q6_false">False</label><br><br>
+        </div>
+
+        <div id='q6_correct' style='display: none'>
+            <p style='color: green;'>Correct </p>
+        </div>
+
+        <div id='q6_error' style='display: none'>
+            <p style='color: red;'>Incorrect, while BLUE has a choice of which decision to take, the game will be forced to end at this point with the payoffs BLUE choose. There is no turn 7. Try again. </p>
+        </div>
+
+
+        <div id='q7' class='form-inline' style='display: none'>
+            <label for="q5a_ans">7. If both players select CONTINUE until turn 6, BLUE is faced with a choice of receiving </label>
+            <input style="width:10%;" type="text" id="q7a_ans"/>
+            <inline> LD for selecting END and </inline>
+            <input style="width:10%;" type="text" id="q7b_ans"/>
+            <inline> LD for selecting CONTINUE</inline>
+        </div>
+
+        <div id='q7_correct' style='display: none'>
+            <p style='color: green;'>Correct </p>
+        </div>
+
+        <div id='q7_error' style='display: none'>
+            <p style='color: red;'>Incorrect. Follow the path on the decision tree above carefully. At the 6th position, what are the two choices BLUE has? What payment does BLUE receive for each of this choices? Try again. </p>
+        </div>
+
+        <br>
+        <button class = 'otree-btn-next btn btn-primary' id='check' type='button' onclick='update()'>
+            Check
+        </button>
+
+        <input type='hidden' name='part1_intro_q1' id='part1_intro_q1' />
+        <input type='hidden' name='part1_intro_q2' id='part1_intro_q2' />
+        <input type='hidden' name='part1_intro_q3' id='part1_intro_q3' />
+        <input type='hidden' name='part1_intro_q4' id='part1_intro_q4' />
+        <input type='hidden' name='part1_intro_q4' id='part1_intro_q5' />
+        <input type='hidden' name='part1_intro_q4' id='part1_intro_q6' />
+        <input type='hidden' name='part1_intro_q4' id='part1_intro_q7' />
+
+        <button class = 'otree-btn-next btn btn-primary' id='next' style='visibility: visible'>
+            Next
+        </button>
+
     </div>
 
-    <div id='q1_error' style='display: none'>
-        <p style='color: red;'>Incorrect, this statement is True. Each turn there are 2 choices: CONTINUE or END. Try Again.</p>
-    </div>
 
 
-    <div id='q2' style='display: none'>
-        <p> 2. Participants are randomly paired to each other</p>
-        <input type="radio" id="q2_true" name="q2" value="True">
-        <label for="q2_true">True</label><br>
-        <input type="radio" id="q2_false" name="q2" value="False">
-        <label for="q2_false">False</label><br><br>
-    </div>
 
-    <div id='q2_correct' style='display: none'>
-        <p style='color: green;'>Correct </p>
-    </div>
-
-    <div id='q2_error' style='display: none'>
-        <p style='color: red;'>Incorrect, you will indeed be randomly assigned to a new person each round. Try again. </p>
-    </div>
-
-
-    <div id='q3' style='display: none'>
-        <p> 3. BLUE goes first</p>
-        <input type="radio" id="q3_true" name="q3" value="True">
-        <label for="q2_true">True</label><br>
-        <input type="radio" id="q3_false" name="q3" value="False">
-        <label for="q2_false">False</label><br><br>
-    </div>
-
-    <div id='q3_correct' style='display: none'>
-        <p style='color: green;'>Correct </p>
-    </div>
-
-    <div id='q3_error' style='display: none'>
-        <p style='color: red;'>Incorrect, if you look at the tree, we see that turn 1 is RED. Try again. </p>
-    </div>
-
-
-    <div id='q4' class='form-inline' style='display: none'>
-        <label for="q4_ans">4. If RED selects CONTINUE and then BLUE selects END, BLUE will receive </label>
-        <input style="width:10%;" type="text" id="q4_ans"/>
-        <inline> LD</inline>
-    </div>
-
-    <div id='q4_correct' style='display: none'>
-        <p style='color: green;'>Correct </p>
-    </div>
-
-    <div id='q4_error' style='display: none'>
-        <p style='color: red;'>Incorrect. Follow the path on the decision tree above carefully. If RED continues to turn 2 and
-            then BLUE ends, what position do they end at? What is BLUE's payoff in this position. Try again. </p>
-    </div>
-
-
-    <div id='q5' class='form-inline' style='display: none'>
-        <label for="q5a_ans">5. If both players select CONTINUE until turn 3, when RED selects END, RED will
-        receive </label>
-        <input style="width:10%;" type="text" id="q5a_ans"/>
-        <inline> LD and BLUE will receive </inline>
-        <input style="width:10%;" type="text" id="q5b_ans"/>
-        <inline> LD </inline>
-    </div>
-
-    <div id='q5_correct' style='display: none'>
-        <p style='color: green;'>Correct </p>
-    </div>
-
-    <div id='q5_error' style='display: none'>
-        <p style='color: red;'>Incorrect. Follow the path on the decision tree above carefully. If both continue to turn 3 and
-            then RED ends, what position do they end at? What are each of their payoffs in this position. Try again. </p>
-    </div>
-
-
-    <div id='q6' style='display: none'>
-        <p> 6. The game will end after the 6th round regardless of what BLUE chooses </p>
-        <input type="radio" id="q6_true" name="q6" value="True">
-        <label for="q6_true">True</label><br>
-        <input type="radio" id="q6_false" name="q6" value="False">
-        <label for="q6_false">False</label><br><br>
-    </div>
-
-    <div id='q6_correct' style='display: none'>
-        <p style='color: green;'>Correct </p>
-    </div>
-
-    <div id='q6_error' style='display: none'>
-        <p style='color: red;'>Incorrect, while BLUE has a choice of which decision to take, the game will be forced to end at this point with the payoffs BLUE choose. There is no turn 7. Try again. </p>
-    </div>
-
-
-    <div id='q7' class='form-inline' style='display: none'>
-        <label for="q5a_ans">7. If both players select CONTINUE until turn 6, BLUE is faced with a choice of receiving </label>
-        <input style="width:10%;" type="text" id="q7a_ans"/>
-        <inline> LD for selecting END and </inline>
-        <input style="width:10%;" type="text" id="q7b_ans"/>
-        <inline> LD for selecting CONTINUE</inline>
-    </div>
-
-    <div id='q7_correct' style='display: none'>
-        <p style='color: green;'>Correct </p>
-    </div>
-
-    <div id='q7_error' style='display: none'>
-        <p style='color: red;'>Incorrect. Follow the path on the decision tree above carefully. At the 6th position, what are the two choices BLUE has? What payment does BLUE receive for each of this choices? Try again. </p>
-    </div>
-
-    <br>
-    <button class = 'otree-btn-next btn btn-primary' id='check' type='button' onclick='update()'>
-        Check
-    </button>
-
-    <input type='hidden' name='part1_intro_q1' id='part1_intro_q1' />
-    <input type='hidden' name='part1_intro_q2' id='part1_intro_q2' />
-    <input type='hidden' name='part1_intro_q3' id='part1_intro_q3' />
-    <input type='hidden' name='part1_intro_q4' id='part1_intro_q4' />
-    <input type='hidden' name='part1_intro_q4' id='part1_intro_q5' />
-    <input type='hidden' name='part1_intro_q4' id='part1_intro_q6' />
-    <input type='hidden' name='part1_intro_q4' id='part1_intro_q7' />
-
-    <button class = 'otree-btn-next btn btn-primary' id='next' style='visibility: visible'>
-        Next
-    </button>
 
     <script>
         let state = 1;
@@ -210,8 +231,7 @@
 
               case 4:
                 document.getElementById('q3_correct').style.display = 'none'
-                if (document.getElementById('q4_ans').value == "20") {
-                    <!-- TODO: make dynamic based on which version -->
+                if (document.getElementById('q4_ans').value == js_vars.q4_ans) {
                     state = 5;
                     document.getElementById('q4_correct').style.display = 'block'
                     document.getElementById('q5').style.display = 'block'
