@@ -173,8 +173,8 @@ function reset(){
 }
 
 function update(){
+    reset();
     switch(turn) {
-      reset();
       case 6:
         document.getElementById('turn_6').style.display = 'block';
         break;
@@ -195,6 +195,7 @@ function update(){
       default:
         break;
     }
+
     if( (turn%2) == (js_vars.my_id%2) ){
         expires = new Date().getTime() + 15500;
         document.getElementById('time-tag').innerText = "Time Remaining";

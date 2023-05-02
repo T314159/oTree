@@ -256,12 +256,12 @@ class Questionnaire(Page):
     @staticmethod
     def error_message(player, values):
         if len(values['ans1']) < 60:
-            return 'Please expand a little more for Question 1'
+            return 'Please expand a little more for Question 1. 60 character minimum'
         if len(values['ans3']) < 40:
-            return 'Please expand a little more for Question 3'
+            return 'Please expand a little more for Question 3. 40 character minimum'
         if not player.participant.control:
             if len(values['ans6']) < 40:
-                return 'Please expand a little more for Question 6'
+                return 'Please expand a little more for Question 6. 40 character minimum'
 
 class Game1Rules(Page):
     @staticmethod
