@@ -230,8 +230,8 @@ class OtherEnded(Page):
         return player.group.end_turn % 2 != player.id_in_group % 2
 
     def vars_for_template(player: Player):
-        if player.participant.game_ends[player.round_number-1] == 7: choice = "END"
-        else: choice = "CONTINUE"
+        if player.participant.game_ends[player.round_number-1] == 7: choice = "CONTINUE"
+        else: choice = "END"
         return dict(choice=choice, current_game=current_game(player, player.round_number))
 
 

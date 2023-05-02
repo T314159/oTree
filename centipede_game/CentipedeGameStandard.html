@@ -164,26 +164,35 @@ function liveRecv(data){
 }
 
 
+function clear(){
+    document.getElementById('turn_1').style.display = 'none';
+    document.getElementById('turn_2').style.display = 'none';
+    document.getElementById('turn_3').style.display = 'none';
+    document.getElementById('turn_4').style.display = 'none';
+    document.getElementById('turn_5').style.display = 'none';
+    document.getElementById('turn_6').style.display = 'none';
+}
+
 function update(){
     switch(turn) {
+      clear();
       case 6:
         document.getElementById('turn_6').style.display = 'block';
-        document.getElementById('turn_5').style.display = 'none';
+        break;
       case 5:
         document.getElementById('turn_5').style.display = 'block';
-        document.getElementById('turn_4').style.display = 'none';
         break;
       case 4:
         document.getElementById('turn_4').style.display = 'block';
-        document.getElementById('turn_3').style.display = 'none';
         break;
       case 3:
-        document.getElementById('turn_2').style.display = 'none';
         document.getElementById('turn_3').style.display = 'block';
         break;
       case 2:
-        document.getElementById('turn_1').style.display = 'none';
         document.getElementById('turn_2').style.display = 'block';
+        break;
+      case 1:
+        document.getElementById('turn_1').style.display = 'block';
       default:
         break;
     }
