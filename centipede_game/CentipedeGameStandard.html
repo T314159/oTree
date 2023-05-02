@@ -164,7 +164,7 @@ function liveRecv(data){
 }
 
 
-function clear(){
+function reset(){
     document.getElementById('turn_1').style.display = 'none';
     document.getElementById('turn_2').style.display = 'none';
     document.getElementById('turn_3').style.display = 'none';
@@ -175,7 +175,7 @@ function clear(){
 
 function update(){
     switch(turn) {
-      clear();
+      reset();
       case 6:
         document.getElementById('turn_6').style.display = 'block';
         break;
