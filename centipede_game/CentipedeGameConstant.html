@@ -134,9 +134,14 @@ function func_end(){
 
 function liveRecv(data){
     setTimeout(()=> {
-        if (data['choice'] == 'Continue'){
+        if (data['choice'] == 'Continue' && turn != 6){
             turn += 1;
             update();
+        }
+        else if (data['choice'] == 'Continue' && turn == 6) {
+            document.getElementById('end_turn').value = 7;
+            form = document.getElementById("form");
+            form.submit();
         }
         else if (data['choice'] == 'End'){
             document.getElementById('end_turn').value = turn;
