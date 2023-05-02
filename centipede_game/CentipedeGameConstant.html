@@ -114,12 +114,23 @@ setInterval(function () {
 
 var turn = 1;
 function func_continue(){
-    let now = new Date().getTime();
-    let distance = Math.floor((expires - now)/1000);
+    if(turn != 6){
+        let now = new Date().getTime();
+        let distance = Math.floor((expires - now)/1000);
 
-    turn += 1;
-    liveSend({'choice': 'Continue', 'time-left': distance});
-    update();
+        turn += 1;
+        liveSend({'choice': 'Continue', 'time-left': distance});
+        update();
+    }
+    else{
+        let now = new Date().getTime();
+        let distance = Math.floor((expires - now)/1000);
+
+        liveSend({'choice': 'Continue', 'time-left': distance});
+        document.getElementById('end_turn').value = 7;
+        form = document.getElementById('form');
+        form.submit();
+    }
 }
 
 function func_end(){
