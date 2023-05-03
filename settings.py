@@ -3,38 +3,37 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='guess_two_thirds',
-        display_name="Guess 2/3 of the Average",
-        app_sequence=['guess_two_thirds', 'payment_info'],
-        num_demo_participants=3
-    ),
-    dict(
-        name='survey', app_sequence=['survey', 'payment_info'], num_demo_participants=1
-    ),
-    dict(
         name='ravens_test',
         display_name="Raven's Test",
-        app_sequence=['ravens_test', 'payment_info'],
-        num_demo_participants=2
-    ),
-    dict(
-        name='trust_tutorial',
-        display_name="Trust Tutorial",
-        app_sequence=['trust_tutorial', 'payment_info'],
+        app_sequence=['ravens_test'],
         num_demo_participants=2
     ),
     dict(
         name='IQ_and_rational_behavior_small',
         display_name="IQ and Rational Behavior (4 players)",
         app_sequence=['IQ_and_rational_behavior_part1', 'ravens_test', 'IQ_and_rational_behavior_part2',
-                      'centipede_game', 'IQ_and_rational_behavior_part3', 'payment_info'],
+                      'centipede_game', 'IQ_and_rational_behavior_part3'],
         num_demo_participants=4
     ),
     dict(
-        name='IQ_and_rational_behavior_larger',
+        name='IQ_and_rational_behavior_medium',
         display_name="IQ and Rational Behavior (8 players)",
-        app_sequence=['IQ_and_rational_behavior_part1', 'ravens_test', 'IQ_and_rational_behavior_part2', 'centipede_game', 'IQ_and_rational_behavior_part3', 'payment_info'],
+        app_sequence=['IQ_and_rational_behavior_part1', 'ravens_test', 'IQ_and_rational_behavior_part2', 'centipede_game', 'IQ_and_rational_behavior_part3'],
         num_demo_participants=8
+    ),
+    dict(
+        name='IQ_and_rational_behavior_large',
+        display_name="IQ and Rational Behavior (12 players)",
+        app_sequence=['IQ_and_rational_behavior_part1', 'ravens_test', 'IQ_and_rational_behavior_part2',
+                      'centipede_game', 'IQ_and_rational_behavior_part3'],
+        num_demo_participants=12
+    ),
+    dict(
+        name='IQ_and_rational_behavior_pilot',
+        display_name="IQ and Rational Behavior (16 players)",
+        app_sequence=['IQ_and_rational_behavior_part1', 'ravens_test', 'IQ_and_rational_behavior_part2',
+                      'centipede_game', 'IQ_and_rational_behavior_part3'],
+        num_demo_participants=16
     ),
     dict(
         name='IQ_and_rational_behavior_3',
