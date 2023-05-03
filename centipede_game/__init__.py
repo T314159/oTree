@@ -135,7 +135,7 @@ def current_game(player, round_number):
     elif round_number == 3: return player.participant.game3
 
 
-class CentipedeGameStandard(Page):
+class CPGameExp(Page):
     form_model = 'group'
     form_fields = ['end_turn']
 
@@ -169,7 +169,7 @@ class CentipedeGameStandard(Page):
         player.participant.control = False
 
 
-class CentipedeGameLinear(Page):
+class CPGameLin(Page):
     form_model = 'group'
     form_fields = ['end_turn']
 
@@ -203,7 +203,7 @@ class CentipedeGameLinear(Page):
         player.participant.control = False
 
 
-class CentipedeGameConstant(Page):
+class CPGameCon(Page):
     form_model = 'group'
     form_fields = ['end_turn']
 
@@ -364,8 +364,7 @@ class ResultsWaitPage(WaitPage):
     pass
 
 
-
 page_sequence = [Game1Introduction1, Game1Introduction2, Game1Introduction3, Game1Introduction4,
                  Game2Introduction1, Game2Introduction2, Game3Introduction1, Game3Introduction2,
-                 Game1Rules, Game2Rules, Game3Rules,Assignment, WaitForBoth, CentipedeGameStandard,
-                 CentipedeGameLinear, CentipedeGameConstant, OtherEnded, Questionnaire, ResultsWaitPage]
+                 Game1Rules, Game2Rules, Game3Rules,Assignment, WaitForBoth, CPGameExp,
+                 CPGameLin, CPGameCon, OtherEnded, Questionnaire, ResultsWaitPage]

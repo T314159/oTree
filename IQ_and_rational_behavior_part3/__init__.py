@@ -43,7 +43,7 @@ class Lottery(Page):
 
 
 # PAGES
-class Dictator(Page):
+class Allocation(Page):
     form_model = 'player'
     form_fields = ['dictator_choice']
 
@@ -54,7 +54,7 @@ class Dictator(Page):
 
 
 # PAGES
-class BackwardsInduction(Page):
+class BI(Page):
     form_model = 'player'
     form_fields = ['BI_choice']
 
@@ -130,4 +130,4 @@ class Results(Page):
         )
 
 
-page_sequence = [Introduction, Lottery, Dictator, BackwardsInduction, Demographic, ResultsWaitPage, Results]
+page_sequence = [Introduction, Lottery, Allocation, BI, Demographic, ResultsWaitPage, Results]

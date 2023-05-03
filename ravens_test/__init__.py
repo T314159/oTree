@@ -6,7 +6,6 @@ Your app description
 """
 
 class C(BaseConstants):
-    NAME_IN_URL = 'patterns'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 12
     QUESTION_ORDER = ["03", "10", "12", "15", "16", "18", "21", "22", "28", "30", "31", "34"]
@@ -52,7 +51,7 @@ class PatternExplanation(Page):
         player.participant.raven_results = [0] * C.NUM_ROUNDS
 
 
-class RavensQuestions(Page):
+class PatternQuestions(Page):
     form_model = 'player'
     form_fields = ['img_choice']
 
@@ -109,4 +108,4 @@ class ResultsWaitPage(WaitPage):
             if player.participant.raven_percentile > 99.5: player.participant.raven_percentile = 99.5
             if player.participant.raven_percentile < 0.5: player.participant.raven_percentile = 0.5
 
-page_sequence = [PatternExplanation, RavensQuestions, End, ResultsWaitPage]
+page_sequence = [PatternExplanation, PatternQuestions, End, ResultsWaitPage]
