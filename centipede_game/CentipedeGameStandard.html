@@ -92,6 +92,9 @@
 
 {{ block script }}
 <script>
+
+
+
 var expires = new Date().getTime() + 15500;
 setInterval(function () {
     let now = new Date().getTime();
@@ -112,21 +115,22 @@ setInterval(function () {
 }, 10000);
 
 
-var turn = 1;
+var turn = js_vars.current_turn;
+update();
 function func_continue(){
     if(turn != 6){
         let now = new Date().getTime();
         let distance = Math.floor((expires - now)/1000);
 
         turn += 1;
-        liveSend({'choice': 'Continue', 'time-left': distance});
+        liveSend({'choice': 'Continue', 'time-left': distance, 'current_turn': turn});
         update();
     }
     else{
         let now = new Date().getTime();
         let distance = Math.floor((expires - now)/1000);
 
-        liveSend({'choice': 'Continue', 'time-left': distance});
+        liveSend({'choice': 'Continue', 'time-left': distance, 'current_turn': turn});
         document.getElementById('end_turn').value = 7;
         form = document.getElementById('form');
         form.submit();
@@ -137,7 +141,7 @@ function func_end(){
     let now = new Date().getTime();
     let distance = Math.floor((expires - now)/1000);
 
-    liveSend({'choice': 'End', 'time-left': distance});
+    liveSend({'choice': 'End', 'time-left': distance, 'current_turn': turn});
     document.getElementById('end_turn').value = turn;
     form = document.getElementById('form');
     form.submit();

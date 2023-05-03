@@ -145,9 +145,13 @@ class CentipedeGameStandard(Page):
 
     @staticmethod
     def js_vars(player: Player):
-        return dict(my_id=player.id_in_group)
+        return dict(my_id=player.id_in_group, current_turn=player.participant.current_turn)
 
     def live_method(player: Player, data):
+        player.participant.current_turn = data['current_turn']
+        for other_player in player.get_others_in_group():
+            other_player.participant.current_turn = data['current_turn']
+
         if player.id_in_group == 1:
             return {2: {'choice' : data['choice'], 'time-left' : data['time-left']}}
         else:
@@ -175,9 +179,13 @@ class CentipedeGameLinear(Page):
 
     @staticmethod
     def js_vars(player: Player):
-        return dict(my_id=player.id_in_group)
+        return dict(my_id=player.id_in_group, current_turn=player.participant.current_turn)
 
     def live_method(player: Player, data):
+        player.participant.current_turn = data['current_turn']
+        for other_player in player.get_others_in_group():
+            other_player.participant.current_turn = data['current_turn']
+
         if player.id_in_group == 1:
             return {2: {'choice' : data['choice'], 'time-left' : data['time-left']}}
         else:
@@ -205,9 +213,13 @@ class CentipedeGameConstant(Page):
 
     @staticmethod
     def js_vars(player: Player):
-        return dict(my_id=player.id_in_group)
+        return dict(my_id=player.id_in_group, current_turn=player.participant.current_turn)
 
     def live_method(player: Player, data):
+        player.participant.current_turn = data['current_turn']
+        for other_player in player.get_others_in_group():
+            other_player.participant.current_turn = data['current_turn']
+
         if player.id_in_group == 1:
             return {2: {'choice' : data['choice'], 'time-left' : data['time-left']}}
         else:
@@ -345,6 +357,8 @@ class Assignment(Page):
             other_color=other_color
         )
 
+    def before_next_page(player: Player, timeout_happened):
+        player.participant.current_turn = 1
 
 class ResultsWaitPage(WaitPage):
     pass
