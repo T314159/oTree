@@ -1,0 +1,75 @@
+{{ block title }}
+Demographic Information
+{{ endblock }}
+{{ block content }}
+<style>
+    .otree-title {
+        background: #EEF5FF;
+        font-size: 40px;
+        text-align: center;
+        padding: 5% 0% 2% 0%;
+    }
+    .otree-body {
+        max-width:1600px
+    }
+    .otree-btn-next {
+        float: right;
+        margin-right: 1%;
+    }
+    p,a,span, label {
+        font-size: 20px;
+    }
+</style>
+    <p> Please answer the last question below before continuing on to the payment page </p>
+    <br>
+
+<input type='hidden' name='gender' id='gender' value=0 />
+    <input type='hidden' name='gender_other' id='gender_other' value=0 />
+
+    <label for="gender_select">Gender: </label>
+    <select name="gender_select" id="gender_select" onchange="update()">
+      <option value="default">     </option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+
+
+
+    <div id='other' class='form-inline' style='display: none'>
+        <label for="other_input"> Other: </label>
+        <input style="width:10%;" type="text" id="other_input" onchange="update_other(this.value);"/>
+    </div>
+
+
+    {{ formfield_errors 'gender' }}
+
+    <br>
+    <br>
+    <p> Click 'Next' if you are happy with this choice and wish to proceed. </p>
+
+    <button class = 'otree-btn-next btn btn-primary' id='next'>
+    Next
+    </button>
+
+    <script>
+    document.getElementById("next").disabled = true;
+    function update(input) {
+      if(document.getElementById('gender_select').value != "default"){
+        document.getElementById("next").disabled = false;
+        if(document.getElementById('gender_select').value == "other"){
+          document.getElementById('other').style.display = 'block';
+        }
+        else{
+          document.getElementById('other').style.display = 'none';
+          document.getElementById('gender').value = document.getElementById('gender_select').value;
+        }
+      }
+    }
+    function update_other(input) {
+          document.getElementById('gender').value = document.getElementById('other_input').value;
+    }
+    </script>
+
+
+{{ endblock }}

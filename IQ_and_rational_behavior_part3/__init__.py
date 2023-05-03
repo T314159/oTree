@@ -25,8 +25,7 @@ class Player(BasePlayer):
     dictator_choice = models.IntegerField()
     BI_choice = models.IntegerField(widget=widgets.RadioSelect, choices=[1, 2, 3, 4, 5, 6])
 
-    gender = models.StringField(choices=['Male', 'Female', 'Other'])
-    gender_other = models.StringField(label="You selected 'other'")
+    gender = models.StringField()
 
 
 # PAGES
@@ -68,7 +67,8 @@ class ResultsWaitPage(WaitPage):
 
 class Demographic(Page):
     form_model = 'player'
-    form_fields = ['gender', 'gender_other']
+    form_fields = ['gender']
+
 
 class Results(Page):
     def vars_for_template(player: Player):
