@@ -21,15 +21,20 @@
         }
     </style>
 
-    <p>You are the {{ your_color }} participant. You have been randomly paired with another person: the
-      {{ other_color }} participant.<p/>
-
+    {{ if player.id_in_group == 1}}
+    <p> <inline style="color:#FF0000"><b> You are the RED participant. </b></inline> You have been randomly paired with another person: the
+    BLUE participant.<p/>
+    {{ endif }}
+    {{ if player.id_in_group == 2}}
+    <p> <inline style="color:#0000FF"><b> You are the BLUE participant. </b></inline> You have been randomly paired with another person: the
+    RED participant.<p/>
+    {{ endif }}
     <div>
         <table style="margin-top: 4%">
             <tr>
                 <td style="width: 45%">
-                    <p>{{ other_color }} performed in the {{ other_quartile }}
-                      Quartile. This means that they scored higher than
+                    <p><b>{{ other_color }} performed in the {{ other_quartile }}
+                      Quartile.</b> This means that they scored higher than
                       between {{ quartile_range }} of participants in the lab. <p/>
                 </td>
                 <td style="padding-left: 2%">
@@ -40,9 +45,9 @@
     </div>
 
     {{ if player.id_in_group == 1 }}
-    <p> Your will go first. </p>
+    <p><b> You will go first. </b></p>
     {{ else }}
-    <p> Your will go second. </p>
+    <p><b> You will go second. </b></p>
     {{ endif }}
 
     <p>Click “ready” when you are ready to begin. Game {{ player.round_number }} will begin once both participants click

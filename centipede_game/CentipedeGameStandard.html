@@ -18,7 +18,7 @@
         float: right;
         margin-right: 1%;
     }
-    p {
+    p, span, inline {
         font-size: 20px;
     }
 
@@ -65,6 +65,14 @@
 
             </td>
             <td>
+                <p><b>Turn <inline id="turn_display"> 1 </inline> </b> </p>
+                {{ if player.id_in_group == 1}}
+                <p style="color:#FF0000"> You are Red</p>
+                {{ endif }}
+                {{ if player.id_in_group == 2}}
+                <p style="color:#0000FF"> You are Blue</p>
+                {{ endif }}
+                <br> <br>
                 <p id="time-tag">Time Remaining</p>
                 <span id="time-left"> 15 </span>
             </td>
@@ -179,6 +187,7 @@ function reset(){
 
 function update(){
     reset();
+    document.getElementById('turn_display').innerHTML = turn;
     switch(turn) {
       case 6:
         document.getElementById('turn_6').style.display = 'block';
