@@ -20,7 +20,7 @@
         float: right;
         margin-right: 1%;
     }
-    p {
+    p, label {
         font-size: 20px;
     }
 
@@ -34,12 +34,18 @@
         width: 70%;
     }
     .slider {
-    margin-left: 5%;
+    margin-left: 2%;
     margin-right: 2%;
-    width: 78%;
+    width: 100%;
+    }
+    table{
+    margin-left: 2%
     }
     td {
     padding: 2% 2% 0% 0%;
+    }
+    .col-form-label{
+        font-size: 20px;
     }
     </style>
     </head>
@@ -57,23 +63,23 @@
     <input type='hidden' name='ans2b' id='ans2b' value='0' />
     <input type='hidden' name='ans2c' id='ans2c' value='0' />
 
-    <table>
+    <table style="width:98%">
       <tr>
-        <td style="width:60%"> I expected that if I continued at turn 1 then RED/BLUE would continue at turn 2
+        <td> I expected that if I continued at turn 1 then RED/BLUE would continue at turn 2
     with probability </td>
-        <td> <input type="range" id="ans2a_visible" min="0" max="100" value="0" class="slider" oninput="updateQ2a(this)">
+        <td style="width:27%"> <input type="range" id="ans2a_visible" min="0" max="100" value="0" class="slider" oninput="updateQ2a(this)">
         <label><span id="ans2a_visible_label">  0 </span></label> <br> </td>
       </tr>
       <tr>
         <td>I expected that if I continued at turns 1 and 3 and RED/BLUE continued at turn 2,
     then RED/BLUE would continue in turn 4 with probability:</td>
-        <td> <input type="range" id="ans2b_visible" min="0" max="100" value="0" class="slider" oninput="updateQ2b(this)">
+        <td style="width:27%"> <input type="range" id="ans2b_visible" min="0" max="100" value="0" class="slider" oninput="updateQ2b(this)">
         <label><span id="ans2b_visible_label">  0 </span></label> <br> </td>
       </tr>
       <tr>
         <td>I expected that if I continued at turns 1, 3 and 5 and RED/BLUE continued at
     turns 2 and 4, then RED/BLUE would continue at turn 6 with probability:</td>
-        <td><input type="range" id="ans2c_visible" min="0" max="100" value="0" class="slider" oninput="updateQ2c(this)">
+        <td style="width:27%"><input type="range" id="ans2c_visible" min="0" max="100" value="0" class="slider" oninput="updateQ2c(this)">
         <label><span id="ans2c_visible_label">  0 </span></label> <br></td>
       </tr>
     </table>
@@ -128,6 +134,8 @@
           <option value=10 label="A lot"></option>
         </datalist>
         {{ formfield_errors 'ans5' }}
+
+        <br>
 
         {{ formfield 'ans6' label="6. Why or why not? (1-3 sentences) - 40 character min" }}
 

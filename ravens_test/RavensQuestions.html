@@ -19,6 +19,13 @@ p {
 .otree-timer {
     display: none;
 }
+.persist{
+    height:16px;
+    width:16px;
+    align: center;
+    margin-left:39%;
+    margin-bottom:12%;
+}
 </style>
 
     <p align="right">You have <span id="time-left"></span> remaining to complete the test.</p>
@@ -29,6 +36,8 @@ p {
     </div>
 
     <div style="float:left; padding-left:4%; padding-top:2%; width:51%;">
+
+
     {{ for image in image_data }}
         <label style="text-align: left; width:24%">
             <img src="{{ static image.path }}" width="100%">

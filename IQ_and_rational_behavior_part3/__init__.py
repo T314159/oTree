@@ -25,6 +25,9 @@ class Player(BasePlayer):
     dictator_choice = models.IntegerField()
     BI_choice = models.IntegerField(widget=widgets.RadioSelect, choices=[1, 2, 3, 4, 5, 6])
 
+    gender = models.StringField(choices=['Male', 'Female', 'Other'])
+    gender_other = models.StringField(label="You selected 'other'")
+
 
 # PAGES
 class Introduction(Page):
@@ -63,6 +66,9 @@ class BackwardsInduction(Page):
 class ResultsWaitPage(WaitPage):
     pass
 
+class Demographic(Page):
+    form_model = 'player'
+    form_fields = ['gender', 'gender_other']
 
 class Results(Page):
     def vars_for_template(player: Player):
@@ -70,7 +76,7 @@ class Results(Page):
 
         part1_earned = 0
         part1_correct = 0
-        selected = random.choices([0, 1], k=2) #ToDo: same as q length , 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+        selected = random.choices([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], k=2)
         for question_index in selected:
             if player.participant.raven_results[question_index] == 1:
                 part1_earned += 100
@@ -93,7 +99,7 @@ class Results(Page):
             if lottery_result == 1: part3_extra = "Lottery result was A"
             else: part3_extra = "Lottery result was B"
 
-        elif selected == "Allocation":
+        elif part3_selected == "Allocation":
             pass
             part3_earned += 100-player.participant.dictator_choice
             part3_earned += player.participant.dictator_from_others
@@ -124,4 +130,4 @@ class Results(Page):
         )
 
 
-page_sequence = [Introduction, Lottery, Dictator, BackwardsInduction, ResultsWaitPage, Results]
+page_sequence = [Introduction, Lottery, Dictator, BackwardsInduction, Demographic, ResultsWaitPage, Results]
