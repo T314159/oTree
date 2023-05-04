@@ -29,6 +29,8 @@
     <p> <inline style="color:#0000FF"><b> You are the BLUE participant. </b></inline> You have been randomly paired with another person: the
     RED participant.<p/>
     {{ endif }}
+
+    {{ if not player.participant.control }}
     <div>
         <table style="margin-top: 4%">
             <tr>
@@ -43,6 +45,7 @@
             </tr>
         </table>
     </div>
+    {{ endif }}
 
     {{ if player.id_in_group == 1 }}
     <p><b> You will go first. </b></p>

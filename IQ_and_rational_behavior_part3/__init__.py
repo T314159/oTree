@@ -21,9 +21,9 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    lottery_choice = models.IntegerField(widget=widgets.RadioSelect, choices=[1, 2, 3, 4, 5, 6])
-    dictator_choice = models.IntegerField()
-    BI_choice = models.IntegerField(widget=widgets.RadioSelect, choices=[1, 2, 3, 4, 5, 6])
+    lottery_choice = models.IntegerField(initial=0, widget=widgets.RadioSelect, choices=[1, 2, 3, 4, 5, 6])
+    dictator_choice = models.IntegerField(initial=0)
+    BI_choice = models.IntegerField(initial=0, widget=widgets.RadioSelect, choices=[1, 2, 3, 4, 5, 6])
 
     gender = models.StringField()
 
@@ -113,6 +113,7 @@ class Results(Page):
 
         part3_text = '{} LD = ${:.2f}'.format(part3_earned, part3_earned / 100.0)
 
+        player.participant.payoff = part1_earned+part2_earned+part3_earned
 
         total_text = '${:.2f}'.format((500+part1_earned+part2_earned+part3_earned) / 100.0)
 

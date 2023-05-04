@@ -38,16 +38,21 @@ Allocation Choice
 
     <p> Click 'Next' if you are happy with this choice and wish to proceed. </p>
 
+    <button class = 'otree-btn-next btn btn-primary' id='next'>
+    Next
+    </button>
+
     <script>
+        document.getElementById("next").disabled = true;
         function update(input) {
+            document.getElementById("next").disabled = false;
             let value = parseInt(input.value) + ' LD';
             document.getElementById('dictator_choice').value = parseInt(input.value);
             document.getElementById('dictator_choice_visible_label').innerHTML = value;
             let other = 100-parseInt(input.value);
             document.getElementById('confirmation').innerHTML = "You have selected to give <b>" + value + "</b> to the other participant and keep <b>" + other + " LD</b> for yourself";
+
            }
     </script>
-
-    {{ next_button }}
 
 {{ endblock }}

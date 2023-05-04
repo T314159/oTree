@@ -65,7 +65,7 @@ def creating_session(subsession: Subsession):
 
 
 class Group(BaseGroup):
-    end_turn = models.IntegerField()
+    end_turn = models.IntegerField(initial=0)
 
 class Player(BasePlayer):
     ans1 = models.LongStringField()
@@ -75,9 +75,9 @@ class Player(BasePlayer):
     ans3 = models.LongStringField()
     ans4 = models.IntegerField()
     ans7 = models.IntegerField()
-    if not False:
-        ans5 = models.LongStringField()
-        ans6 = models.LongStringField()
+
+    ans5 = models.LongStringField()
+    ans6 = models.LongStringField()
 
 
 # PAGES
@@ -166,7 +166,6 @@ class CPGameExp(Page):
         player.participant.game_payoffs[player.round_number-1] = payoff[player.group.end_turn-1][player.id_in_group-1]
         player.participant.game_ends[player.round_number-1] = player.group.end_turn
 
-        player.participant.control = False
 
 
 class CPGameLin(Page):
@@ -200,7 +199,6 @@ class CPGameLin(Page):
         player.participant.game_payoffs[player.round_number-1] = payoff[player.group.end_turn-1][player.id_in_group-1]
         player.participant.game_ends[player.round_number-1] = player.group.end_turn
 
-        player.participant.control = False
 
 
 class CPGameCon(Page):
@@ -234,8 +232,6 @@ class CPGameCon(Page):
         player.participant.game_payoffs[player.round_number-1] = payoff[player.group.end_turn-1][player.id_in_group-1]
         player.participant.game_ends[player.round_number-1] = player.group.end_turn
 
-        player.participant.control = False
-
 
 class OtherEnded(Page):
     def is_displayed(player: Player):
@@ -252,7 +248,7 @@ class Questionnaire(Page):
     form_model = 'player'
 
     @staticmethod
-    def get_form_fields(player): #Change
+    def get_form_fields(player):
         if player.participant.control:
             if player.round_number != 3:
                 return ['ans1', 'ans2a', 'ans2b', 'ans2c', 'ans3', 'ans4']
