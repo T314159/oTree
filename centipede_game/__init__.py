@@ -28,7 +28,7 @@ def creating_session(subsession: Subsession):
         import random
         i = 0
         while i < len(subsession.get_players()):
-            next = [i+1, i + 2]
+            next = [i + 1, i + 2]
             random.shuffle(next)
             matrix.append(next)
             next = [i + 3, i + 4]
