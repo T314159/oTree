@@ -90,30 +90,32 @@ class Results(Page):
         part2_text = '{} LD = ${:.2f}'.format(part2_earned, part2_earned / 100.0)
 
 
-        part3_earned = 0
-        part3_selected = random.choice(["Lottery", "Allocation", "Reasoning"])
-        if part3_selected == "Lottery":
-            lottery_result = random.randint(1,2)
-            payoff_matrix = [[140,140], [120,180], [100,220], [80,260], [60,300], [10, 350]]
-            part3_earned += payoff_matrix[player.lottery_choice-1][lottery_result-1]
-            if lottery_result == 1: part3_extra = "Lottery result was A"
-            else: part3_extra = "Lottery result was B"
+        lottery_earned = 0
+        allocation_earned = 0
+        bI_earned = 0
 
-        elif part3_selected == "Allocation":
-            pass
-            part3_earned += 100-player.participant.dictator_choice
-            part3_earned += player.participant.dictator_from_others
-            part3_extra = f"{player.participant.dictator_from_others} given to you by another player"
+        lottery_result = random.randint(1,2)
+        payoff_matrix = [[140,140], [120,180], [100,220], [80,260], [60,300], [10, 350]]
+        lottery_earned += payoff_matrix[player.lottery_choice-1][lottery_result-1]
+        if lottery_result == 1: lottery_extra = "Lottery result was A"
+        else: lottery_extra = "Lottery result was B"
+
+        allocation_earned += 100-player.participant.dictator_choice
+        allocation_earned += player.participant.dictator_from_others
+        allocation_extra = f"{player.participant.dictator_from_others} given to you by another player"
+
+        if player.BI_choice == 1:
+            bI_earned = 100
+            bI_extra = "Your answer was Correct"
         else:
-            if player.BI_choice == 1:
-                part3_earned = 100
-                part3_extra = "Answer was correct"
-            else:
-                part3_extra = "Answer was incorrect"
+            bI_extra = "Your answer was Incorrect"
 
-        part3_text = '{} LD = ${:.2f}'.format(part3_earned, part3_earned / 100.0)
+        lottery_text = '{} LD = ${:.2f}'.format(lottery_earned, lottery_earned / 100.0)
+        allocation_text = '{} LD = ${:.2f}'.format(allocation_earned, allocation_earned / 100.0)
+        bI_text = '{} LD = ${:.2f}'.format(bI_earned, bI_earned / 100.0)
 
-        player.participant.payoff = part1_earned+part2_earned+part3_earned
+
+        player.participant.payoff = part1_earned+part2_earned+lottery_earned+allocation_earned+bI_earned
 
         total_text = '${:.2f}'.format((500+part1_earned+part2_earned+part3_earned) / 100.0)
 
@@ -124,9 +126,12 @@ class Results(Page):
             part2_selected=part2_selected,
             part2_turn=part2_turn,
             part2_text=part2_text,
-            part3_selected=part3_selected,
-            part3_extra=part3_extra,
-            part3_text = part3_text,
+            lottery_extra=lottery_extra,
+            allocation_extra=allocation_extra,
+            bI_extra=bI_extra,
+            lottery_text = lottery_text,
+            allocation_text=allocation_text,
+            bI_text=bI_text,
             total_text=total_text
         )
 
